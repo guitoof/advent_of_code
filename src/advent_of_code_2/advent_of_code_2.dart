@@ -18,8 +18,11 @@ class MoveCommand {
   const MoveCommand({required this.type, required this.value});
 }
 
-int getCoordinatesProductForFinalPosition(List<MoveCommand> moveCommands) {
-  Point<int> position = Point<int>(0, 0);
+Point<int> _move({
+  Point<int> initialPosition = const Point<int>(0, 0),
+  List<MoveCommand> moveCommands = const [],
+}) {
+  Point<int> position = initialPosition;
   for (var command in moveCommands) {
     switch (command.type) {
       case MoveCommandType.forward:
@@ -33,5 +36,10 @@ int getCoordinatesProductForFinalPosition(List<MoveCommand> moveCommands) {
         break;
     }
   }
+  return position;
+}
+
+int getCoordinatesProductForFinalPosition(List<MoveCommand> moveCommands) {
+  Point<int> position = _move(moveCommands: moveCommands);
   return position.x * position.y;
 }
