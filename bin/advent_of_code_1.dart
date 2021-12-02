@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 int countIncreasingMeasurements(List<int> input) {
   var acc = 0;
   input.asMap().forEach((int index, int value) {
@@ -34,16 +31,4 @@ int countIncreasingMeasurementsByWindow(List<int> input,
     previousSum = sum;
   });
   return acc;
-}
-
-void main(List<String> arguments) async {
-  final input = await File('${Directory.current.path}/data/input')
-      .openRead()
-      .map(utf8.decode)
-      .transform(LineSplitter())
-      .map((item) => int.parse(item))
-      .toList();
-  print('Part 1 : ${countIncreasingMeasurements(input)}');
-  print(
-      'Part 2 : ${countIncreasingMeasurementsByWindow(input, windowSize: 3)}');
 }
