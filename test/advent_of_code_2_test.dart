@@ -14,6 +14,7 @@ void main() {
       MoveCommand(type: MoveCommandType.down, value: 8),
       MoveCommand(type: MoveCommandType.forward, value: 2),
     ];
-    expect(getCoordinatesProductForFinalPosition(input), 150);
+    expect(getCoordinatesProductForFinalPosition(moveCommands: input), 150);
+  });
   });
 }

@@ -13,6 +13,7 @@ void main(List<String> arguments) async {
 
   print("Day 2 :");
   final input2 = await getInput2Data();
-  print('Part 1: ${getCoordinatesProductForFinalPosition(input2)}');
+  print(
+      'Part 1: ${getCoordinatesProductForFinalPosition(moveCommands: input2)}');
   print("--------------------------------------------------------");
 }

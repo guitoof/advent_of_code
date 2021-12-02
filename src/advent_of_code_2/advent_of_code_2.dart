@@ -39,7 +39,15 @@ Point<int> _move({
   return position;
 }
 
-int getCoordinatesProductForFinalPosition(List<MoveCommand> moveCommands) {
+enum CommandInterpretationMethod {
+  classic,
+  aim,
+}
+
+int getCoordinatesProductForFinalPosition(
+    {required List<MoveCommand> moveCommands,
+    CommandInterpretationMethod interpretationMethod =
+        CommandInterpretationMethod.classic}) {
   Point<int> position = _move(moveCommands: moveCommands);
   return position.x * position.y;
 }
