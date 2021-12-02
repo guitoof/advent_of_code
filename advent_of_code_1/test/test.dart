@@ -20,4 +20,22 @@ void main() {
     ];
     expect(countIncreasingMeasurements(input), 7);
   });
+
+  test(
+      'should return the number of measurement window sum larger than the previsous measurement window sum',
+      () {
+    const input = [
+      199,
+      200,
+      208,
+      210,
+      200,
+      207,
+      240,
+      269,
+      260,
+      263,
+    ];
+    expect(countIncreasingMeasurementsByWindow(input, windowSize: 3), 5);
+  });
 }
