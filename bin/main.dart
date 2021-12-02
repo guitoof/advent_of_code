@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'advent_of_code_x.dart';
+import '../src/advent_of_code_x.dart';
 
 void main(List<String> arguments) async {
   final input = await File('${Directory.current.path}/data/input')
