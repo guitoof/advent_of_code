@@ -1,6 +1,6 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import '../src/advent_of_code_1.dart';
+import '../src/advent_of_code_1/advent_of_code_1.dart';
 
 void main() {
   test(
