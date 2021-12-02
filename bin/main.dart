@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'advent_of_code_1.dart';
+import 'advent_of_code_x.dart';
 
 void main(List<String> arguments) async {
   final input = await File('${Directory.current.path}/data/input')
@@ -10,7 +10,5 @@ void main(List<String> arguments) async {
       .transform(LineSplitter())
       .map((item) => int.parse(item))
       .toList();
-  print('Part 1 : ${countIncreasingMeasurements(input)}');
-  print(
-      'Part 2 : ${countIncreasingMeasurementsByWindow(input, windowSize: 3)}');
+  print('The answer is: ${myFunction()}');
 }
