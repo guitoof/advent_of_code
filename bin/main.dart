@@ -15,5 +15,9 @@ void main(List<String> arguments) async {
   final input2 = await getInput2Data();
   print(
       'Part 1: ${getCoordinatesProductForFinalPosition(moveCommands: input2)}');
+  print('Part 2: ${getCoordinatesProductForFinalPosition(
+    moveCommands: input2,
+    interpretationMethod: CommandInterpretationMethod.aim,
+  )}');
   print("--------------------------------------------------------");
 }
