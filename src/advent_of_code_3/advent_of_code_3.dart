@@ -11,13 +11,15 @@ int binaryToInt(String binary) {
 }
 
 int getPowerConsumption({required List<List<int>> report}) {
-  final sum = report.fold<List<int>>([0, 0, 0, 0, 0], (sum, entry) {
+  final sum = report.fold<List<int>>(List.generate(report[0].length, (_) => 0),
+      (sum, entry) {
     var newSum = <int>[];
     for (var i = 0; i < sum.length; i++) {
       newSum.add(sum[i] + entry[i]);
     }
     return newSum;
   });
+  print(sum);
   final gammaRate = sum.map((e) => e > report.length / 2 ? 1 : 0);
   final epsilonRate = gammaRate.map((e) => e == 1 ? 0 : 1).toList();
   return binaryToInt(gammaRate.join()) * binaryToInt(epsilonRate.join());

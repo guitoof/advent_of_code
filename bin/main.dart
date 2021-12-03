@@ -2,6 +2,8 @@ import '../src/advent_of_code_1/advent_of_code_1.dart';
 import '../src/advent_of_code_1/data_source.dart';
 import '../src/advent_of_code_2/advent_of_code_2.dart';
 import '../src/advent_of_code_2/data_source.dart';
+import '../src/advent_of_code_3/advent_of_code_3.dart';
+import '../src/advent_of_code_3/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -19,5 +21,10 @@ void main(List<String> arguments) async {
     moveCommands: input2,
     interpretationMethod: CommandInterpretationMethod.aim,
   )}');
+  print("--------------------------------------------------------");
+
+  print("Day 3 :");
+  final input3 = await getInput3Data();
+  print('Part 1: ${getPowerConsumption(report: input3)}');
   print("--------------------------------------------------------");
 }
