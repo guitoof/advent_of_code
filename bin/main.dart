@@ -26,5 +26,6 @@ void main(List<String> arguments) async {
   print("Day 3 :");
   final input3 = await getInput3Data();
   print('Part 1: ${getPowerConsumption(report: input3)}');
+  print('Part 2: ${getLifeSupportRating(report: input3)}');
   print("--------------------------------------------------------");
 }

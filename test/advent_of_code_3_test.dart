@@ -44,4 +44,22 @@ void main() {
     ];
     expect(getPowerConsumption(report: input), 198);
   });
+
+  test('should return the life support rating by the given report', () {
+    const input = [
+      [0, 0, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 0, 1, 1, 0],
+      [1, 0, 1, 1, 1],
+      [1, 0, 1, 0, 1],
+      [0, 1, 1, 1, 1],
+      [0, 0, 1, 1, 1],
+      [1, 1, 1, 0, 0],
+      [1, 0, 0, 0, 0],
+      [1, 1, 0, 0, 1],
+      [0, 0, 0, 1, 0],
+      [0, 1, 0, 1, 0],
+    ];
+    expect(getLifeSupportRating(report: input), 230);
+  });
 }
