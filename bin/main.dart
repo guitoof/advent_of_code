@@ -4,6 +4,8 @@ import '../src/advent_of_code_2/advent_of_code_2.dart';
 import '../src/advent_of_code_2/data_source.dart';
 import '../src/advent_of_code_3/advent_of_code_3.dart';
 import '../src/advent_of_code_3/data_source.dart';
+import '../src/advent_of_code_4/advent_of_code_4.dart';
+import '../src/advent_of_code_4/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -27,5 +29,11 @@ void main(List<String> arguments) async {
   final input3 = await getInput3Data();
   print('Part 1: ${getPowerConsumption(report: input3)}');
   print('Part 2: ${getLifeSupportRating(report: input3)}');
+  print("--------------------------------------------------------");
+
+  print("Day 4 :");
+  final input4 = await getInput4Data();
+  print(
+      'Part 1: ${getBingoScore(bingoBoards: input4.bingoBoards.map(parseInputBoard).toList(), drawnNumbers: input4.drawnNumbers)}');
   print("--------------------------------------------------------");
 }
