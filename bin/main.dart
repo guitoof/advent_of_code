@@ -43,6 +43,8 @@ void main(List<String> arguments) async {
 
   print("Day 5 :");
   final input5 = await getInput5Data();
-  print('Part 1: ${getDangerousAreasMapping(input5)}');
+  print(
+      'Part 1: ${getDangerousAreasMapping(input5, size: 1000, excludeDiagonals: true)}');
+  print('Part 2: ${getDangerousAreasMapping(input5, size: 1000)}');
   print("--------------------------------------------------------");
 }
