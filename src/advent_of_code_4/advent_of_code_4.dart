@@ -1,5 +1,7 @@
 typedef BingoBoard = List<List<BingoNumber>>;
 
+enum BingoBoardWinningPlace { first, last }
+
 class BingoNumber {
   final int value;
   bool marked = false;
@@ -68,13 +70,8 @@ bool _hasWinningColumn(BingoBoard bingoBoard) {
   return false;
 }
 
-BingoBoard? _hasWinner(List<BingoBoard> bingoBoards) {
-  try {
-    return bingoBoards.firstWhere(isWinner);
-  } catch (_) {
-    return null;
-  }
-}
+List<BingoBoard> _hasWinners(List<BingoBoard> bingoBoards) =>
+    bingoBoards.where(isWinner).toList();
 
 int getBingoBoardScore(BingoBoard bingoBoard) {
   return bingoBoard.fold(
@@ -88,13 +85,36 @@ int getBingoBoardScore(BingoBoard bingoBoard) {
 }
 
 int getBingoScore(
-    {required List<BingoBoard> bingoBoards, required List<int> drawnNumbers}) {
-  for (var drawnNumber in drawnNumbers) {
-    _mark(bingoBoards, drawnNumber);
-    final winningBoard = _hasWinner(bingoBoards);
-    if (winningBoard != null) {
-      return drawnNumber * getBingoBoardScore(winningBoard);
-    }
+    {required List<BingoBoard> bingoBoards,
+    required List<int> drawnNumbers,
+    BingoBoardWinningPlace which = BingoBoardWinningPlace.first}) {
+  switch (which) {
+    case BingoBoardWinningPlace.first:
+      for (var drawnNumber in drawnNumbers) {
+        _mark(bingoBoards, drawnNumber);
+        final winningBoards = _hasWinners(bingoBoards);
+        if (winningBoards.isNotEmpty) {
+          return drawnNumber * getBingoBoardScore(winningBoards.first);
+        }
+      }
+      break;
+    case BingoBoardWinningPlace.last:
+      var winningBoards = <BingoBoard>[];
+      int? lastWinningDrawnNumber;
+      for (var drawnNumber in drawnNumbers) {
+        _mark(bingoBoards, drawnNumber);
+        final newWinningBoards = _hasWinners(bingoBoards);
+        if (newWinningBoards.isNotEmpty) {
+          winningBoards += newWinningBoards;
+          for (var wb in winningBoards) {
+            bingoBoards.remove(wb);
+          }
+          lastWinningDrawnNumber = drawnNumber;
+        }
+      }
+      if (lastWinningDrawnNumber == null) break;
+      return lastWinningDrawnNumber * getBingoBoardScore(winningBoards.last);
   }
+
   throw Exception('No winning board found in: $bingoBoards');
 }

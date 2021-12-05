@@ -35,5 +35,7 @@ void main(List<String> arguments) async {
   final input4 = await getInput4Data();
   print(
       'Part 1: ${getBingoScore(bingoBoards: input4.bingoBoards.map(parseInputBoard).toList(), drawnNumbers: input4.drawnNumbers)}');
+  print(
+      'Part 2: ${getBingoScore(bingoBoards: input4.bingoBoards.map(parseInputBoard).toList(), drawnNumbers: input4.drawnNumbers, which: BingoBoardWinningPlace.last)}');
   print("--------------------------------------------------------");
 }
