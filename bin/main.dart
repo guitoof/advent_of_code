@@ -6,6 +6,8 @@ import '../src/advent_of_code_3/advent_of_code_3.dart';
 import '../src/advent_of_code_3/data_source.dart';
 import '../src/advent_of_code_4/advent_of_code_4.dart';
 import '../src/advent_of_code_4/data_source.dart';
+import '../src/advent_of_code_5/advent_of_code_5.dart';
+import '../src/advent_of_code_5/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -37,5 +39,10 @@ void main(List<String> arguments) async {
       'Part 1: ${getBingoScore(bingoBoards: input4.bingoBoards.map(parseInputBoard).toList(), drawnNumbers: input4.drawnNumbers)}');
   print(
       'Part 2: ${getBingoScore(bingoBoards: input4.bingoBoards.map(parseInputBoard).toList(), drawnNumbers: input4.drawnNumbers, which: BingoBoardWinningPlace.last)}');
+  print("--------------------------------------------------------");
+
+  print("Day 5 :");
+  final input5 = await getInput5Data();
+  print('Part 1: ${getDangerousAreasMapping(input5)}');
   print("--------------------------------------------------------");
 }
