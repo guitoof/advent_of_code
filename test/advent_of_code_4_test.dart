@@ -18,7 +18,6 @@ void main() {
         bingoNumber.marked = true;
         return bingoNumber;
       }).toList();
-      print(bingoBoard);
       expect(isWinner(bingoBoard), true);
     });
 
