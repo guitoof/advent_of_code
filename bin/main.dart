@@ -8,6 +8,8 @@ import '../src/advent_of_code_4/advent_of_code_4.dart';
 import '../src/advent_of_code_4/data_source.dart';
 import '../src/advent_of_code_5/advent_of_code_5.dart';
 import '../src/advent_of_code_5/data_source.dart';
+import '../src/advent_of_code_6/advent_of_code_6.dart';
+import '../src/advent_of_code_6/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -47,4 +49,11 @@ void main(List<String> arguments) async {
       'Part 1: ${getDangerousAreasMapping(input5, size: 1000, excludeDiagonals: true)}');
   print('Part 2: ${getDangerousAreasMapping(input5, size: 1000)}');
   print("--------------------------------------------------------");
+
+  print("Day 6 :");
+  final input6 = await getInput6Data();
+  print('Part 1: ${simulateLanternFishProduction(input6, days: 80)}');
+  print('Part 2: ${simulateOptimizedLanternFishProduction(input6, days: 256)}');
+  print("--------------------------------------------------------");
+
 }
