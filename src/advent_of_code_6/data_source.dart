@@ -1,0 +1,7 @@
+import '../utils/data_source.dart';
+
+Future<List<int>> getInput6Data() async {
+  final input = await getInputData<List<int>>(
+      id: 6, parser: (line) => line.split(',').map(int.parse).toList());
+  return input.first;
+}
