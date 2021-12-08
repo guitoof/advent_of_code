@@ -10,6 +10,8 @@ import '../src/advent_of_code_5/advent_of_code_5.dart';
 import '../src/advent_of_code_5/data_source.dart';
 import '../src/advent_of_code_6/advent_of_code_6.dart';
 import '../src/advent_of_code_6/data_source.dart';
+import '../src/advent_of_code_7/advent_of_code_7.dart';
+import '../src/advent_of_code_7/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -56,4 +58,9 @@ void main(List<String> arguments) async {
   print('Part 2: ${simulateOptimizedLanternFishProduction(input6, days: 256)}');
   print("--------------------------------------------------------");
 
+  print("Day 7 :");
+  final input7 = await getInput7Data();
+  print('Part 1: ${getFuelConsumption(input7)}');
+  print('Part 2: ${getDynamicFuelConsumption(input7)}');
+  print("--------------------------------------------------------");
 }
