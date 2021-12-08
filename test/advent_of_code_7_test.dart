@@ -9,4 +9,13 @@ void main() {
       expect(getFuelConsumption(input), 37);
     });
   });
+
+  group('getDynamicFuelConsumption', () {
+    test(
+        'should return the quantity of fuel used by the crabs to align with a dynamic consumption',
+        () {
+      const input = <int>[16, 1, 2, 0, 4, 2, 7, 1, 2, 14];
+      expect(getDynamicFuelConsumption(input), 168);
+    });
+  });
 }

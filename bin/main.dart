@@ -61,5 +61,6 @@ void main(List<String> arguments) async {
   print("Day 7 :");
   final input7 = await getInput7Data();
   print('Part 1: ${getFuelConsumption(input7)}');
+  print('Part 2: ${getDynamicFuelConsumption(input7)}');
   print("--------------------------------------------------------");
 }
