@@ -12,6 +12,8 @@ import '../src/advent_of_code_6/advent_of_code_6.dart';
 import '../src/advent_of_code_6/data_source.dart';
 import '../src/advent_of_code_7/advent_of_code_7.dart';
 import '../src/advent_of_code_7/data_source.dart';
+import '../src/advent_of_code_8/advent_of_code_8.dart';
+import '../src/advent_of_code_8/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -62,5 +64,10 @@ void main(List<String> arguments) async {
   final input7 = await getInput7Data();
   print('Part 1: ${getFuelConsumption(input7)}');
   print('Part 2: ${getDynamicFuelConsumption(input7)}');
+  print("--------------------------------------------------------");
+
+  print("Day 8 :");
+  final input8 = await getInput8Data();
+  print('Part 1: ${countSimpleDigits(input8)}');
   print("--------------------------------------------------------");
 }
