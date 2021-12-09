@@ -69,5 +69,6 @@ void main(List<String> arguments) async {
   print("Day 8 :");
   final input8 = await getInput8Data();
   print('Part 1: ${countSimpleDigits(input8)}');
+  print('Part 2: ${sumAllDecodedOutputValues(input8)}');
   print("--------------------------------------------------------");
 }
