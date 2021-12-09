@@ -72,6 +72,5 @@ int getDangerousAreasMapping(List<List<List<int>>> input,
     final endPoint = Point(line[1][0], line[1][1]);
     mapping.addLine(startPoint, endPoint);
   }
-  // print(mapping.map);
   return mapping.dangerousPointsCount;
 }
