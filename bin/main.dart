@@ -14,6 +14,8 @@ import '../src/advent_of_code_7/advent_of_code_7.dart';
 import '../src/advent_of_code_7/data_source.dart';
 import '../src/advent_of_code_8/advent_of_code_8.dart';
 import '../src/advent_of_code_8/data_source.dart';
+import '../src/advent_of_code_9/advent_of_code_9.dart';
+import '../src/advent_of_code_9/data_source.dart';
 
 void main(List<String> arguments) async {
   print("Day 1 :");
@@ -70,5 +72,11 @@ void main(List<String> arguments) async {
   final input8 = await getInput8Data();
   print('Part 1: ${countSimpleDigits(input8)}');
   print('Part 2: ${sumAllDecodedOutputValues(input8)}');
+  print("--------------------------------------------------------");
+
+  print("Day 9 :");
+  final input9 = await getInput9Data();
+  print('Part 1: ${sumMinHeights(input9)}');
+  print('Part 2: ${getLargestBassinArea(input9)}');
   print("--------------------------------------------------------");
 }
