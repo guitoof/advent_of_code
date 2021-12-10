@@ -77,6 +77,6 @@ void main(List<String> arguments) async {
   print("Day 9 :");
   final input9 = await getInput9Data();
   print('Part 1: ${sumMinHeights(input9)}');
-
+  print('Part 2: ${getLargestBassinArea(input9)}');
   print("--------------------------------------------------------");
 }
