@@ -24,8 +24,8 @@ const today = 10;
 void displayAdventOfCodeResponse(
     {required int day, dynamic part1Response, dynamic part2Response}) async {
   print("📆 Day $day :");
-  if (part1Response != null) print('Part 1: $part1Response');
-  if (part2Response != null) print('Part 2: $part2Response');
+  if (part1Response != null) print('⭐️ Part 1: $part1Response');
+  if (part2Response != null) print('⭐️ Part 2: $part2Response');
   print("--------------------------------------------------------");
 }
 
@@ -126,6 +126,10 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       for (var _day = 1; _day <= today; _day++) {
         await runAdventOfCodeProgram(day: _day);
       }
+      print('#####################################');
+      print('$today ⭐️ collected 🙌');
+      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
 }
