@@ -55,8 +55,47 @@ int getIllegalCharactersScore(List<String> illegalCharacters) =>
         (score, illegalCharacter) =>
             score + getIllegalCharacterScore(illegalCharacter));
 
-int getSyntaxCheckerScore(Input input) {
+int getMissingClosingCharacter(String closingCharacter) {
+  switch (closingCharacter) {
+    case ')':
+      return 1;
+    case ']':
+      return 2;
+    case '}':
+      return 3;
+    case '>':
+      return 4;
+    default:
+      return 0;
+  }
+}
+
+int getClosingSequenceScore(String closingSequence) => closingSequence
+    .split('')
+    .fold(0, (score, char) => 5 * score + getMissingClosingCharacter(char));
+
+int getMissingSequencesScore(List<String> missingSequences) {
+  final missingSequencesScores =
+      missingSequences.map(getClosingSequenceScore).toList();
+  missingSequencesScores.sort();
+  return missingSequencesScores[
+      (missingSequencesScores.length / 2).round() - 1];
+}
+
+int getAutocompleteScore(List<String> input) =>
+    getMissingSequencesScore(getSyntaxErrors(input).missingSequences);
+
+class SyntaxErrors {
+  final List<String> illegalChars;
+  final List<String> missingSequences;
+
+  const SyntaxErrors(
+      {required this.illegalChars, required this.missingSequences});
+}
+
+SyntaxErrors getSyntaxErrors(Input input) {
   final illegalChars = <String>[];
+  final missingSequences = <String>[];
   for (var line in input) {
     final openingChars = [];
     for (var char in line.split('')) {
@@ -73,9 +112,29 @@ int getSyntaxCheckerScore(Input input) {
           continue;
         }
         illegalChars.add(char);
+        openingChars.clear();
         break;
       }
     }
+    if (openingChars.isNotEmpty) {
+      missingSequences.add(
+        openingChars.reversed
+            .map((openingChar) => _kSupportedChunkSeparators
+                .firstWhere((chunkSeparator) =>
+                    openingChar == chunkSeparator.openingChar)
+                .closingChar)
+            .join(),
+      );
+    }
   }
-  return getIllegalCharactersScore(illegalChars);
+  return SyntaxErrors(
+      illegalChars: illegalChars, missingSequences: missingSequences);
+}
+
+int getSyntaxCheckerScore(Input input) {
+  return getIllegalCharactersScore(getSyntaxErrors(input).illegalChars);
+}
+
+List<String> getCompletionSequences(Input input) {
+  return getSyntaxErrors(input).missingSequences;
 }

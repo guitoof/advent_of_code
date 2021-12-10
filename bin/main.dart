@@ -119,6 +119,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       displayAdventOfCodeResponse(
         day: 10,
         part1Response: getSyntaxCheckerScore(input),
+        part2Response: getAutocompleteScore(input),
       );
       break;
     default:
