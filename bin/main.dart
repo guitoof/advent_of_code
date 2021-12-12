@@ -18,8 +18,10 @@ import '../src/advent_of_code_9/advent_of_code_9.dart';
 import '../src/advent_of_code_9/data_source.dart';
 import '../src/advent_of_code_10/advent_of_code_10.dart';
 import '../src/advent_of_code_10/data_source.dart';
+import '../src/advent_of_code_11/advent_of_code_11.dart';
+import '../src/advent_of_code_11/data_source.dart';
 
-const today = 10;
+const today = 11;
 
 void displayAdventOfCodeResponse(
     {required int day, dynamic part1Response, dynamic part2Response}) async {
@@ -120,6 +122,14 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         day: 10,
         part1Response: getSyntaxCheckerScore(input),
         part2Response: getAutocompleteScore(input),
+      );
+      break;
+    case 11:
+      final input = await getInput11Data();
+      displayAdventOfCodeResponse(
+        day: 11,
+        part1Response: countOctopusFlashes(input, steps: 100),
+        part2Response: firstSyncFlash(input),
       );
       break;
     default:
