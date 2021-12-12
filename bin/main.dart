@@ -129,6 +129,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       displayAdventOfCodeResponse(
         day: 11,
         part1Response: countOctopusFlashes(input, steps: 100),
+        part2Response: firstSyncFlash(input),
       );
       break;
     default:

@@ -7,8 +7,11 @@ class OctopusSquad {
   List<List<int>> _flashed = [];
 
   OctopusSquad({required octopuses}) {
-    _octopuses = List.from(octopuses);
+    _octopuses = List.from(octopuses.map((line) => List<int>.from(line)));
   }
+
+  int get sum => _octopuses.fold<int>(0,
+      (count, line) => count + line.fold(0, (count, value) => count + value));
 
   void boostAll() {
     for (var i = 0; i < _octopuses.length; i++) {
@@ -92,4 +95,14 @@ int countOctopusFlashes(Input input, {required int steps}) {
   final octopusSquad = OctopusSquad(octopuses: input);
   return [for (var step = 1; step <= steps; step++) step]
       .fold(0, (flashesCount, _) => flashesCount + octopusSquad.nextStep());
+}
+
+int firstSyncFlash(Input input) {
+  final octopusSquad = OctopusSquad(octopuses: input);
+  var steps = 0;
+  while (octopusSquad.sum > 0) {
+    steps++;
+    octopusSquad.nextStep();
+  }
+  return steps;
 }
