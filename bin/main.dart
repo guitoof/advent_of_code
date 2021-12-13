@@ -20,12 +20,17 @@ import '../src/advent_of_code_10/advent_of_code_10.dart';
 import '../src/advent_of_code_10/data_source.dart';
 import '../src/advent_of_code_11/advent_of_code_11.dart';
 import '../src/advent_of_code_11/data_source.dart';
+import '../src/advent_of_code_12/advent_of_code_12.dart';
+import '../src/advent_of_code_12/data_source.dart';
 
 const today = 11;
 
 void displayAdventOfCodeResponse(
-    {required int day, dynamic part1Response, dynamic part2Response}) async {
-  print("📆 Day $day :");
+    {required int day,
+    String name = '',
+    dynamic part1Response,
+    dynamic part2Response}) async {
+  print("📆 Day $day - $name");
   if (part1Response != null) print('⭐️ Part 1: $part1Response');
   if (part2Response != null) print('⭐️ Part 2: $part2Response');
   print("--------------------------------------------------------");
@@ -130,6 +135,16 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         day: 11,
         part1Response: countOctopusFlashes(input, steps: 100),
         part2Response: firstSyncFlash(input),
+      );
+      break;
+    case 12:
+      final input = await getInput12Data();
+      displayAdventOfCodeResponse(
+        day: 12,
+        name: 'Passage Pathing',
+        part1Response: countPaths(input),
+        part2Response:
+            countPaths(input, method: CaveExplorationMethod.oneSmallCaveTwice),
       );
       break;
     default:
