@@ -24,3 +24,9 @@ Future<List<T>> getInputData<T>(
     {required int id, required Parser<T> parser}) async {
   return getInputDataFromLocation(id: id, location: 'data', parser: parser);
 }
+
+Future<List<T>> getTestInputData<T>(
+    {required int id, required Parser<T> parser}) async {
+  return getInputDataFromLocation(
+      id: id, location: 'test/advent_of_code_${id}_test/data', parser: parser);
+}

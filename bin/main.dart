@@ -22,8 +22,10 @@ import '../src/advent_of_code_11/advent_of_code_11.dart';
 import '../src/advent_of_code_11/data_source.dart';
 import '../src/advent_of_code_12/advent_of_code_12.dart';
 import '../src/advent_of_code_12/data_source.dart';
+import '../src/advent_of_code_13/advent_of_code_13.dart';
+import '../src/advent_of_code_13/data_source.dart';
 
-const today = 11;
+const today = 13;
 
 void displayAdventOfCodeResponse(
     {required int day,
@@ -147,6 +149,14 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
             countPaths(input, method: CaveExplorationMethod.oneSmallCaveTwice),
       );
       break;
+    case 13:
+      final input = await getInput13Data();
+      displayAdventOfCodeResponse(
+        day: 13,
+        name: 'Transparent Origami',
+        part1Response: countVisibleDotsAfterFoldingOnce(input),
+      );
+      break;
     default:
       for (var _day = 1; _day <= today; _day++) {
         await runAdventOfCodeProgram(day: _day);
@@ -155,6 +165,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       print('$today ⭐️ collected 🙌');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+      print('⭐️⭐️⭐️⭐️');
       break;
   }
 }
