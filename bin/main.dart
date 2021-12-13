@@ -26,8 +26,11 @@ import '../src/advent_of_code_12/data_source.dart';
 const today = 11;
 
 void displayAdventOfCodeResponse(
-    {required int day, dynamic part1Response, dynamic part2Response}) async {
-  print("📆 Day $day :");
+    {required int day,
+    String name = '',
+    dynamic part1Response,
+    dynamic part2Response}) async {
+  print("📆 Day $day - $name");
   if (part1Response != null) print('⭐️ Part 1: $part1Response');
   if (part2Response != null) print('⭐️ Part 2: $part2Response');
   print("--------------------------------------------------------");
@@ -138,7 +141,10 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput12Data();
       displayAdventOfCodeResponse(
         day: 12,
+        name: 'Passage Pathing',
         part1Response: countPaths(input),
+        part2Response:
+            countPaths(input, method: CaveExplorationMethod.oneSmallCaveTwice),
       );
       break;
     default:

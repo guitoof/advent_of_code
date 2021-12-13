@@ -1,5 +1,7 @@
 enum CaveSize { small, large }
 
+enum CaveExplorationMethod { smallCavesOnlyOnce, oneSmallCaveTwice }
+
 class Cave {
   final String id;
   List<String> connectedCaveIds = [];
@@ -8,7 +10,8 @@ class Cave {
 
   CaveSize get size => id == id.toUpperCase() ? CaveSize.large : CaveSize.small;
 
-  bool get isVisitableMoreThanOnce => size == CaveSize.large;
+  bool get isVisitableOnlyOnce => (id == 'start' || id == 'end');
+  bool get isAlwaysVisitable => size == CaveSize.large;
 
   @override
   String toString() {
@@ -21,8 +24,9 @@ class Cave {
 
 class CaveLayout {
   List<Cave> caves = [];
+  final CaveExplorationMethod method;
 
-  CaveLayout(List<List<String>> input) {
+  CaveLayout(List<List<String>> input, {required this.method}) {
     for (var connection in input) {
       final fromCave = connection[0];
       final toCave = connection[1];
@@ -60,7 +64,9 @@ class CaveLayout {
           index + 1,
           path.accessibleCaveIds
               .map(
-                (id) => Path(caves: [...path.caves, getCaveById(id: id)]),
+                (id) => Path(
+                    caves: [...path.caves, getCaveById(id: id)],
+                    method: method),
               )
               .toList());
     }
@@ -70,32 +76,60 @@ class CaveLayout {
 
 class Path {
   List<Cave> caves;
+  final CaveExplorationMethod method;
 
-  Path({required this.caves});
+  Path({required this.caves, required this.method});
 
   List<String> get accessibleCaveIds => caves.last.connectedCaveIds
-      .where((caveId) => isCaveWithIdVisitable(caveId: caveId))
+      .where((caveId) => canVisitCaveWithId(caveId: caveId))
       .toList();
+
+  Cave? findDuplicateSmallCave() {
+    Cave? duplicate;
+    final smallCaves =
+        caves.where((cave) => cave.size == CaveSize.small).toList();
+    if (smallCaves.isEmpty) return null;
+    for (var cave in smallCaves) {
+      final potentialDuplicates =
+          smallCaves.where((other) => cave.id == other.id).toList();
+      if (potentialDuplicates.length >= 2) return potentialDuplicates[1];
+    }
+    return duplicate;
+  }
+
+  bool alreadyHaveVisitedSmallCaveTwice() => findDuplicateSmallCave() != null;
 
   bool isPathComplete() => caves.last.id == 'end';
 
-  bool isCaveWithIdVisitable({required String caveId}) {
-    return Cave(id: caveId).isVisitableMoreThanOnce ||
-        caves.every((cave) => cave.id != caveId);
+  bool canVisitCaveWithId({required String caveId}) {
+    if (Cave(id: caveId).isVisitableOnlyOnce &&
+        caves.any((cave) => cave.id == caveId)) return false;
+
+    if (Cave(id: caveId).size == CaveSize.small) {
+      if (method == CaveExplorationMethod.smallCavesOnlyOnce ||
+          alreadyHaveVisitedSmallCaveTwice()) {
+        return caves.every((cave) => cave.id != caveId);
+      }
+      return true;
+    }
+
+    return Cave(id: caveId).isAlwaysVisitable;
   }
 
   bool isDeadEnd() => accessibleCaveIds.isEmpty && caves.last.id != 'end';
 
   @override
-  String toString() => '${caves.map((cave) => cave.id).join(',')}';
+  String toString() => caves.map((cave) => cave.id).join(',');
 }
 
 bool isMappingComplete(List<Path> paths) =>
     paths.every((path) => path.isPathComplete());
 
-int countPaths(List<List<String>> input) {
-  final caveLayout = CaveLayout(input);
-  Path initialPath = Path(caves: [caveLayout.getCaveById(id: 'start')]);
+int countPaths(List<List<String>> input,
+    {CaveExplorationMethod method = CaveExplorationMethod.smallCavesOnlyOnce}) {
+  final caveLayout = CaveLayout(input, method: method);
+  Path initialPath =
+      Path(caves: [caveLayout.getCaveById(id: 'start')], method: method);
   List<Path> paths = [initialPath];
   while (!isMappingComplete(paths)) {
     paths = caveLayout.investigateFurther(paths: paths);
