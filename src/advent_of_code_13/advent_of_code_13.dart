@@ -31,8 +31,10 @@ class TransparentPaper {
   }
 
   @override
-  String toString() =>
-      '${_dots.map((line) => '${line.map((dot) => dot ? '#' : '.').join(' ')}\n').toList()}';
+  String toString() => _dots
+      .map((line) => line.map((dot) => dot ? '#' : '.').join(' '))
+      .toList()
+      .join('\n');
 
   void fold({required FoldingAxis axis, required int value}) {
     int width = _dots[0].length;
@@ -49,7 +51,7 @@ class TransparentPaper {
           }
         }
         for (var line in _dots) {
-          line.removeRange(width - value, width);
+          line.removeRange(value, width);
         }
         break;
       case FoldingAxis.y:
@@ -58,7 +60,7 @@ class TransparentPaper {
             _dots[value - y][x] = _dots[value - y][x] || _dots[value + y][x];
           }
         }
-        _dots.removeRange(height - value, height);
+        _dots.removeRange(value, height);
         break;
     }
   }
@@ -77,3 +79,19 @@ int countVisibleDotsAfterFoldingOnce(Input input) {
   paper.fold(axis: foldingAxis, value: foldingValue);
   return paper.countVisibleDots;
 }
+
+TransparentPaper getVisibleDotsAfterCompleteFolding(Input input) {
+  final paper = TransparentPaper.fromInput(input[0] as DotsPositionInput);
+  final foldingInstructions = (input[1] as FoldingInstructions);
+  for (var foldingInstruction in foldingInstructions) {
+    final foldingAxis = FoldingAxis.values.firstWhere((e) =>
+        e.toString() ==
+        'FoldingAxis.${foldingInstruction.split('=').first.split(' ').last}');
+    final foldingValue = int.parse(foldingInstruction.split('=').last);
+    paper.fold(axis: foldingAxis, value: foldingValue);
+  }
+  return paper;
+}
+
+String printTransparentCode(Input input) =>
+    getVisibleDotsAfterCompleteFolding(input).toString();

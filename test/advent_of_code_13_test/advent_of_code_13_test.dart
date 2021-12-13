@@ -26,4 +26,17 @@ void main() {
       expect(countVisibleDotsAfterFoldingOnce(input), 17);
     });
   });
+  group('countVisibleDotsAfterCompleteFolding', () {
+    test('should the number of visible dots after folding once', () async {
+      Input input = await getInputData();
+      expect(printTransparentCode(input), '''
+# # # # #
+# . . . #
+# . . . #
+# . . . #
+# # # # #
+. . . . .
+. . . . .''');
+    });
+  });
 }

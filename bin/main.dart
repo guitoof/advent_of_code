@@ -155,6 +155,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         day: 13,
         name: 'Transparent Origami',
         part1Response: countVisibleDotsAfterFoldingOnce(input),
+        part2Response: '\n${printTransparentCode(input)}',
       );
       break;
     default:
@@ -165,7 +166,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       print('$today ⭐️ collected 🙌');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️');
+      print('⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
 }
