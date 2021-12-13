@@ -20,6 +20,8 @@ import '../src/advent_of_code_10/advent_of_code_10.dart';
 import '../src/advent_of_code_10/data_source.dart';
 import '../src/advent_of_code_11/advent_of_code_11.dart';
 import '../src/advent_of_code_11/data_source.dart';
+import '../src/advent_of_code_12/advent_of_code_12.dart';
+import '../src/advent_of_code_12/data_source.dart';
 
 const today = 11;
 
@@ -130,6 +132,13 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         day: 11,
         part1Response: countOctopusFlashes(input, steps: 100),
         part2Response: firstSyncFlash(input),
+      );
+      break;
+    case 12:
+      final input = await getInput12Data();
+      displayAdventOfCodeResponse(
+        day: 12,
+        part1Response: countPaths(input),
       );
       break;
     default:
