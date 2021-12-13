@@ -32,7 +32,7 @@ void displayAdventOfCodeResponse(
     String name = '',
     dynamic part1Response,
     dynamic part2Response}) async {
-  print("📆 Day $day - $name");
+  print("--- 📆 Day $day: $name ---");
   if (part1Response != null) print('⭐️ Part 1: $part1Response');
   if (part2Response != null) print('⭐️ Part 2: $part2Response');
   print("--------------------------------------------------------");
@@ -44,6 +44,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput1Data();
       displayAdventOfCodeResponse(
         day: 1,
+        name: 'Sonar Sweep 🔉',
         part1Response: countIncreasingMeasurements(input),
         part2Response:
             countIncreasingMeasurementsByWindow(input, windowSize: 3),
@@ -53,6 +54,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput2Data();
       displayAdventOfCodeResponse(
         day: 2,
+        name: 'Dive! 🤿',
         part1Response:
             getCoordinatesProductForFinalPosition(moveCommands: input),
         part2Response: getCoordinatesProductForFinalPosition(
@@ -65,6 +67,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput3Data();
       displayAdventOfCodeResponse(
         day: 3,
+        name: 'Binary Diagnostic 🔋',
         part1Response: getPowerConsumption(report: input),
         part2Response: getLifeSupportRating(report: input),
       );
@@ -73,6 +76,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput4Data();
       displayAdventOfCodeResponse(
         day: 4,
+        name: 'Giant Squid 🦑',
         part1Response: getBingoScore(
             bingoBoards: input.bingoBoards.map(parseInputBoard).toList(),
             drawnNumbers: input.drawnNumbers),
@@ -86,6 +90,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput5Data();
       displayAdventOfCodeResponse(
         day: 5,
+        name: 'Hydrothermal Venture 🌋',
         part1Response:
             getDangerousAreasMapping(input, size: 1000, excludeDiagonals: true),
         part2Response: getDangerousAreasMapping(input, size: 1000),
@@ -95,6 +100,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput6Data();
       displayAdventOfCodeResponse(
         day: 6,
+        name: 'Lanternfish 🐟',
         part1Response: simulateLanternFishProduction(input, days: 80),
         part2Response: simulateOptimizedLanternFishProduction(input, days: 256),
       );
@@ -103,6 +109,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput7Data();
       displayAdventOfCodeResponse(
         day: 7,
+        name: 'The Treachery of Whales 🐳',
         part1Response: getFuelConsumption(input),
         part2Response: getDynamicFuelConsumption(input),
       );
@@ -111,6 +118,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput8Data();
       displayAdventOfCodeResponse(
         day: 8,
+        name: 'Seven Segment Search 🎰',
         part1Response: countSimpleDigits(input),
         part2Response: sumAllDecodedOutputValues(input),
       );
@@ -119,6 +127,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput9Data();
       displayAdventOfCodeResponse(
         day: 9,
+        name: 'Smoke Basin 🔥',
         part1Response: sumMinHeights(input),
         part2Response: getLargestBassinArea(input),
       );
@@ -127,6 +136,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput10Data();
       displayAdventOfCodeResponse(
         day: 10,
+        name: 'Syntax Scoring 🔍',
         part1Response: getSyntaxCheckerScore(input),
         part2Response: getAutocompleteScore(input),
       );
@@ -135,6 +145,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput11Data();
       displayAdventOfCodeResponse(
         day: 11,
+        name: 'Dumbo Octopus 🐙',
         part1Response: countOctopusFlashes(input, steps: 100),
         part2Response: firstSyncFlash(input),
       );
@@ -143,7 +154,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput12Data();
       displayAdventOfCodeResponse(
         day: 12,
-        name: 'Passage Pathing',
+        name: 'Passage Pathing 🚇',
         part1Response: countPaths(input),
         part2Response:
             countPaths(input, method: CaveExplorationMethod.oneSmallCaveTwice),
@@ -153,7 +164,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       final input = await getInput13Data();
       displayAdventOfCodeResponse(
         day: 13,
-        name: 'Transparent Origami',
+        name: 'Transparent Origami ⿃',
         part1Response: countVisibleDotsAfterFoldingOnce(input),
         part2Response: '\n${printTransparentCode(input)}',
       );
