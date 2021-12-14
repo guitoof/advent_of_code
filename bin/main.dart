@@ -24,8 +24,10 @@ import '../src/advent_of_code_12/advent_of_code_12.dart';
 import '../src/advent_of_code_12/data_source.dart';
 import '../src/advent_of_code_13/advent_of_code_13.dart';
 import '../src/advent_of_code_13/data_source.dart';
+import '../src/advent_of_code_14/advent_of_code_14.dart';
+import '../src/advent_of_code_14/data_source.dart';
 
-const today = 13;
+const today = 14;
 
 void displayAdventOfCodeResponse(
     {required int day,
@@ -169,6 +171,14 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         part2Response: '\n${printTransparentCode(input)}',
       );
       break;
+    case 14:
+      final input = await getInput14Data();
+      displayAdventOfCodeResponse(
+        day: 14,
+        name: 'Extended Polymerization 🧬',
+        part1Response: getPolymereCompositionScore(input, steps: 10),
+      );
+      break;
     default:
       for (var _day = 1; _day <= today; _day++) {
         await runAdventOfCodeProgram(day: _day);
@@ -177,7 +187,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       print('$today ⭐️ collected 🙌');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️');
+      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
 }
