@@ -177,6 +177,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         day: 14,
         name: 'Extended Polymerization 🧬',
         part1Response: getPolymereCompositionScore(input, steps: 10),
+        part2Response: getPolymereCompositionScore(input, steps: 40),
       );
       break;
     default:
@@ -187,7 +188,7 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       print('$today ⭐️ collected 🙌');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
 }
