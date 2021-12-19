@@ -1,3 +1,5 @@
+import 'dart:math';
+
 typedef Input = List<List<int>>;
 
 class DijkstraNode {
@@ -45,8 +47,9 @@ class DijkstraResolver {
   late DijkstraNode currentNode;
 
   DijkstraResolver.fromInput(Input this.map) {
-    for (var i = 0; i < map.length; i++) {
-      for (var j = 0; j < map[0].length; j++) {
+    int subMapSize = 1;
+    for (var i = 0; i <= subMapSize; i++) {
+      for (var j = 0; j <= subMapSize; j++) {
         table.addAll({'$i-$j': DijkstraNode(i: i, j: j, risk: map[i][j])});
       }
     }
@@ -59,7 +62,29 @@ class DijkstraResolver {
   bool isLastNode(DijkstraNode node) =>
       node.i == map.length - 1 && node.j == map[0].length - 1;
 
+  void expandTable() {
+    final currentSize = sqrt(table.entries.length).toInt();
+    if (currentSize == map.length) return;
+    for (var i = 0; i <= min(currentSize - 1, map.length - 1); i++) {
+      table.addAll({
+        '$i-$currentSize':
+            DijkstraNode(i: i, j: currentSize, risk: map[i][currentSize])
+      });
+    }
+    for (var j = 0; j <= min(currentSize - 1, map[0].length - 1); j++) {
+      table.addAll({
+        '$currentSize-$j':
+            DijkstraNode(i: currentSize, j: j, risk: map[currentSize][j])
+      });
+    }
+    table.addAll({
+      '$currentSize-$currentSize': DijkstraNode(
+          i: currentSize, j: currentSize, risk: map[currentSize][currentSize])
+    });
+  }
+
   void nextStep() {
+    expandTable();
     if (currentNode.i < map.length - 1) {
       table['${currentNode.i + 1}-${currentNode.j}']!
           .addPossibleOrigin(currentNode);
@@ -89,5 +114,9 @@ class DijkstraResolver {
 
 int getTotalLowestRisk(Input input) {
   final resolver = DijkstraResolver.fromInput(input);
-  return resolver.solve();
+  final start = DateTime.now().millisecondsSinceEpoch;
+  final result = resolver.solve();
+  final end = DateTime.now().millisecondsSinceEpoch;
+  print('Algorithm Duration: ${(end - start) / 1000}');
+  return result;
 }
