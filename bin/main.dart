@@ -187,20 +187,25 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
       displayAdventOfCodeResponse(
         day: 15,
         name: 'Chiton 🦪',
-        part1Response: getTotalLowestRisk(input),
+        part1Response:
+            getTotalLowestRisk(input, algorithm: PathFindingAlgorithm.aStar),
+        part2Response: getTotalLowestRisk(input,
+            algorithm: PathFindingAlgorithm.aStar, expansionFactor: 5),
       );
       break;
     default:
       for (var _day = 1; _day <= today; _day++) {
         await runAdventOfCodeProgram(day: _day);
       }
-      print('#####################################');
-      print('$today ⭐️ collected 🙌');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
+  print('#####################################');
+  print('$today ⭐️ collected 🙌');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('📅📅📅📅📅📅📅📅📅📅');
+  print('📅📅📅📅📅📅📅📅📅📅');
 }
 
 void main(List<String> arguments) async {
