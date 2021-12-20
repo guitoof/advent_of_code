@@ -26,8 +26,10 @@ import '../src/advent_of_code_13/advent_of_code_13.dart';
 import '../src/advent_of_code_13/data_source.dart';
 import '../src/advent_of_code_14/advent_of_code_14.dart';
 import '../src/advent_of_code_14/data_source.dart';
+import '../src/advent_of_code_15/advent_of_code_15.dart';
+import '../src/advent_of_code_15/data_source.dart';
 
-const today = 14;
+const today = 15;
 
 void displayAdventOfCodeResponse(
     {required int day,
@@ -180,17 +182,30 @@ Future<void> runAdventOfCodeProgram({int? day}) async {
         part2Response: getPolymereCompositionScore(input, steps: 40),
       );
       break;
+    case 15:
+      final input = await getInput15Data();
+      displayAdventOfCodeResponse(
+        day: 15,
+        name: 'Chiton 🦪',
+        part1Response:
+            getTotalLowestRisk(input, algorithm: PathFindingAlgorithm.aStar),
+        part2Response: getTotalLowestRisk(input,
+            algorithm: PathFindingAlgorithm.aStar, expansionFactor: 5),
+      );
+      break;
     default:
       for (var _day = 1; _day <= today; _day++) {
         await runAdventOfCodeProgram(day: _day);
       }
-      print('#####################################');
-      print('$today ⭐️ collected 🙌');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
-      print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
       break;
   }
+  print('#####################################');
+  print('$today ⭐️ collected 🙌');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️');
+  print('📅📅📅📅📅📅📅📅📅📅');
+  print('📅📅📅📅📅📅📅📅📅📅');
 }
 
 void main(List<String> arguments) async {
