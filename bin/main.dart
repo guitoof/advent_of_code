@@ -1,4 +1,4 @@
-// import '../src/challenges/advent_of_code_0/advent_of_code_0.dart';
+import '../src/challenges/advent_of_code_1/advent_of_code_1.dart';
 
 void displayAdventOfCodeResponse({
   required int day,
@@ -13,10 +13,10 @@ void displayAdventOfCodeResponse({
 }
 
 void main(List<String> arguments) async {
-  // displayAdventOfCodeResponse(
-  //   day: 0,
-  //   name: 'Name of the challenge',
-  //   part1Response: (await DailySolver0(day: 0, part: 1).solve()),
-  //   part2Response: (await DailySolver0(day: 0, part: 2).solve()),
-  // );
+  final solver = DailySolver1(day: 1, name: '🍫 Calorie Counting');
+  displayAdventOfCodeResponse(
+    day: 1,
+    name: '🍫 Calorie Counting',
+    part1Response: (await solver.solve(part: 1)),
+  );
 }
