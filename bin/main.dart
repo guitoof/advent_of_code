@@ -18,5 +18,6 @@ void main(List<String> arguments) async {
     day: 1,
     name: solver.name,
     part1Response: (await solver.solve(part: 1)),
+    part2Response: (await solver.solve(part: 2)),
   );
 }
