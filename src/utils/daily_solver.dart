@@ -2,6 +2,8 @@ import 'data_source.dart';
 
 class MissingImplementation extends Error {}
 
+class UnsupportedCase extends Error {}
+
 typedef InputType<T> = List<T>;
 typedef OutputType = int;
 
