@@ -40,5 +40,31 @@ void main() {
         });
       });
     });
+    group('Part 2️⃣ - ', () {
+      group('Example', () {
+        setUpAll(() async {
+          await solver.loadInputData(part: 2);
+        });
+        group('[getTop3MaxNumberOfCalories]', () {
+          test('should return the list of list of the top 3 elves', () async {
+            expect(
+              solver.getTop3MaxNumberOfCalories()..sort(),
+              equals([
+                24000,
+                11000,
+                10000,
+              ]..sort()),
+            );
+          });
+        });
+        group('[getTotalTop3MaxNumberOfCalories]', () {
+          test(
+              'should return the number of calories of the top 3 Elves carrying the max calories',
+              () async {
+            expect(await solver.getTotalTop3MaxNumberOfCalories(), 45000);
+          });
+        });
+      });
+    });
   });
 }
