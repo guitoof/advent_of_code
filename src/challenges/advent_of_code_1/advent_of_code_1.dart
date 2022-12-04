@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../../utils/daily_solver.dart';
+import '../../utils/data_source.dart';
 
 class DailySolver1 extends DailySolver<String> with FoodPayloadCalorieManager {
   DailySolver1({required super.day, required super.name});
@@ -9,8 +10,8 @@ class DailySolver1 extends DailySolver<String> with FoodPayloadCalorieManager {
   String lineParser(String line) => line;
 
   @override
-  Future<void> loadInputData({required int part}) async {
-    await super.loadInputData(part: part);
+  Future<void> loadInputData({required DataSourceType ofType}) async {
+    await super.loadInputData(ofType: ofType);
     foodPayloadByElf =
         inputData.fold<List<FoodPayload>>([[]], (previousValue, line) {
       if (line.isEmpty) {
@@ -23,8 +24,10 @@ class DailySolver1 extends DailySolver<String> with FoodPayloadCalorieManager {
   }
 
   @override
-  Future<OutputType> solve({required int part}) async {
-    await loadInputData(part: part);
+  Future<OutputType> solve(
+      {required int part,
+      DataSourceType forType = DataSourceType.challenge}) async {
+    await loadInputData(ofType: forType);
     switch (part) {
       case 0:
       case 1:
