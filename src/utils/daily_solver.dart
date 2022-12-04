@@ -7,13 +7,9 @@ typedef OutputType = int;
 
 class DailySolver<T> {
   int day;
-  String name;
   late InputType inputData;
 
-  DailySolver({
-    required this.day,
-    required this.name,
-  });
+  DailySolver({required this.day});
 
   /// IMPLEMENT
   T lineParser(String line) => throw MissingImplementation();

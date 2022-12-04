@@ -3,7 +3,7 @@ import '../../utils/data_source.dart';
 
 class DailySolver0 extends DailySolver<String>
     with SomeMixinWithChallengeLogic {
-  DailySolver0({required super.day, required super.name});
+  DailySolver0({required super.day});
 
   @override
   String lineParser(String line) => line; // CHANGE HERE

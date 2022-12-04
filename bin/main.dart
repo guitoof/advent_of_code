@@ -13,10 +13,9 @@ void displayAdventOfCodeResponse({
 }
 
 void main(List<String> arguments) async {
-  final solver = DailySolver0(day: 0, name: '🎄 Advent of Code example');
+  final solver = DailySolver0(day: 0);
   displayAdventOfCodeResponse(
     day: 0,
-    name: solver.name,
     part1Response: (await solver.solve(part: 1)),
   );
 }
