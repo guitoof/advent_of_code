@@ -6,24 +6,50 @@ import '../../test_helpers.dart';
 
 void main() {
   dayTestGroup(
-    day: 0,
+    'Day 0',
     solverBuilder: () => DailySolver0(day: 0),
     partTestGroups: {
       1: PartTestGroup(
-        (solver) {
+        (solver, type) {
           final solver0 = castSolverType<DailySolver0>(solver);
-          test('some test from part 1', () {
-            expect(solver0, isA<DailySolver0>());
-          });
+          testGroupWithExpectedDataByType(
+            '[someMethod1] relevant to part 1',
+            expectedDataMap: {
+              DataSourceType.example: 'Expected Data for Example',
+              // Challenge case will be skipped
+              // if [DataSourceType.challenge] is missing (null)
+            },
+            type: type,
+            body: ({expectedData}) {
+              test('test some behavior of [someMethod1]', () async {
+                expect(solver0, isA<DailySolver0>());
+                // Use [expectedData] to test the behavior of [someMethod]
+                // expect(solver0.someMethod1(), expectedData);
+              });
+            },
+          );
         },
         skipTypes: [DataSourceType.challenge],
       ),
       2: PartTestGroup(
-        (solver) {
+        (solver, type) {
           final solver0 = castSolverType<DailySolver0>(solver);
-          test('some test from part 2', () {
-            expect(solver0, isA<DailySolver0>());
-          });
+          testGroupWithExpectedDataByType(
+            '[someMethod2] relevant to part 2',
+            expectedDataMap: {
+              DataSourceType.example: 'Expected Data for Example',
+              // Challenge case will be skipped
+              // if [DataSourceType.challenge] is missing (null)
+            },
+            type: type,
+            body: ({expectedData}) {
+              test('test some behavior of [someMethod2]', () async {
+                expect(solver0, isA<DailySolver0>());
+                // Use [expectedData] to test the behavior of [someMethod]
+                // expect(solver0.someMethod2(), expectedData);
+              });
+            },
+          );
         },
         skipTypes: [DataSourceType.challenge, DataSourceType.example],
       ),
