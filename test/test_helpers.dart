@@ -2,18 +2,14 @@ import 'package:test/scaffolding.dart';
 import '../src/utils/daily_solver.dart';
 import '../src/utils/data_source.dart';
 
-void testSuite({
+void testSuite<S extends DailySolver>({
   required int day,
-  required DailySolver Function() solverBuilder,
-  required Function(DailySolver solver) part1TestBlock,
-  required Function(DailySolver solver) part2TestBlock,
+  required S Function() solverBuilder,
+  required Function(S solver) part1TestBlock,
+  required Function(S solver) part2TestBlock,
 }) {
-  late DailySolver solver;
+  final solver = solverBuilder();
   group('Day $day -', () {
-    setUpAll(() {
-      solver = solverBuilder();
-    });
-
     group('Part 1 - ', () {
       for (var type in [DataSourceType.example, DataSourceType.challenge]) {
         group('${type.name.toUpperCase()} - ', () {
