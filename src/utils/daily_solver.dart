@@ -10,17 +10,20 @@ class DailySolver<T> {
   String name;
   late InputType inputData;
 
-  DailySolver({required this.day, required this.name});
+  DailySolver({
+    required this.day,
+    required this.name,
+  });
 
   /// IMPLEMENT
   T lineParser(String line) => throw MissingImplementation();
 
   /// IMPLEMENT
   /// Must call super.loadInputData
-  Future<void> loadInputData({required int part}) async {
+  Future<void> loadInputData({required DataSourceType ofType}) async {
     inputData = await getInputData<T>(
       day: day,
-      part: part,
+      type: ofType,
       lineParser: lineParser,
     );
   }

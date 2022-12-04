@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+enum DataSourceType { example, challenge }
+
 Future<List<T>> getInputData<T>({
   required int day,
-  required int part,
+  required DataSourceType type,
   required T Function(String) lineParser,
 }) async {
-  assert(part == 0 || part == 1 || part == 2);
   return await File(
-          '${Directory.current.path}/src/challenges/advent_of_code_$day/data/input_${day}_$part')
+          '${Directory.current.path}/src/challenges/advent_of_code_$day/data/${type.name}_input_$day.data')
       .openRead()
       .map(utf8.decode)
       .transform(LineSplitter())
