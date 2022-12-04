@@ -21,8 +21,7 @@ environment:
 #  * an optional prompt phrase used when asking for the variable
 #  * a list of values (enums only)
 vars:
-  name:
-    type: string
-    description: Your name
-    default: Dash
-    prompt: What is your name?
+  day:
+    type: number
+    description: Index of the day in the Advent calendar
+    prompt: Which day of the Advent calendar?

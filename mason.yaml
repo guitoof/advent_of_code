@@ -2,4 +2,4 @@
 # https://github.com/felangel/mason
 bricks:
   advent_of_code_day:
-    path: ./advent_of_code_day
+    path: ./bricks/advent_of_code_day
