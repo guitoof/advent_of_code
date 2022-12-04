@@ -4,7 +4,7 @@ import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
 class DailySolver1 extends DailySolver<String> with FoodPayloadCalorieManager {
-  DailySolver1({required super.day, required super.name});
+  DailySolver1({required super.day});
 
   @override
   String lineParser(String line) => line;
