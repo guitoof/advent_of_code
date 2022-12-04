@@ -5,8 +5,8 @@ import '../src/utils/data_source.dart';
 void testSuite({
   required int day,
   required DailySolver Function() solverBuilder,
-  required Function part1TestBlock,
-  required Function part2TestBlock,
+  required Function(DailySolver solver) part1TestBlock,
+  required Function(DailySolver solver) part2TestBlock,
 }) {
   late DailySolver solver;
   group('Day $day -', () {
@@ -21,7 +21,7 @@ void testSuite({
             await solver.loadInputData(ofType: type);
           });
 
-          part1TestBlock();
+          part1TestBlock(solver);
         }, skip: type != DataSourceType.example);
       }
     });
@@ -33,7 +33,7 @@ void testSuite({
             await solver.loadInputData(ofType: type);
           });
 
-          part2TestBlock();
+          part2TestBlock(solver);
         }, skip: type != DataSourceType.example);
       }
     });
