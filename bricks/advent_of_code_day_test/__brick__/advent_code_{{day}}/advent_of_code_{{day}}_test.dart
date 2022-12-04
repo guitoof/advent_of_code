@@ -1,17 +1,17 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import '../../../src/challenges/advent_of_code_0/advent_of_code_0.dart';
+import '../../../src/challenges/advent_of_code_{{day}}/advent_of_code_{{day}}.dart';
 import '../../../src/utils/data_source.dart';
 import '../../test_helpers.dart';
 
 void main() {
   dayTestGroup(
-    'Day 0',
-    solverBuilder: () => DailySolver0(day: 0),
+    'Day {{day}}',
+    solverBuilder: () => DailySolver{{day}}(day: {{day}}),
     partTestGroups: {
       1: PartTestGroup(
         (solver, type) {
-          final solver0 = castSolverType<DailySolver0>(solver);
+          final solver{{day}} = castSolverType<DailySolver{{day}}>(solver);
           testGroupWithExpectedDataByType(
             '[someMethod1] relevant to part 1',
             expectedDataMap: {
@@ -22,9 +22,9 @@ void main() {
             type: type,
             body: ({expectedData}) {
               test('test some behavior of [someMethod1]', () async {
-                expect(solver0, isA<DailySolver0>());
+                expect(solver{{day}}, isA<DailySolver{{day}}>());
                 // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver0.someMethod1(), expectedData);
+                // expect(solver{{day}}.someMethod1(), expectedData);
               });
             },
           );
@@ -33,7 +33,7 @@ void main() {
       ),
       2: PartTestGroup(
         (solver, type) {
-          final solver0 = castSolverType<DailySolver0>(solver);
+          final solver{{day}} = castSolverType<DailySolver{{day}}>(solver);
           testGroupWithExpectedDataByType(
             '[someMethod2] relevant to part 2',
             expectedDataMap: {
@@ -44,9 +44,9 @@ void main() {
             type: type,
             body: ({expectedData}) {
               test('test some behavior of [someMethod2]', () async {
-                expect(solver0, isA<DailySolver0>());
+                expect(solver{{day}}, isA<DailySolver{{day}}>());
                 // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver0.someMethod2(), expectedData);
+                // expect(solver{{day}}.someMethod2(), expectedData);
               });
             },
           );

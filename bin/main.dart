@@ -1,4 +1,4 @@
-import '../src/challenges/advent_of_code_0/advent_of_code_0.dart';
+// import '../src/challenges/advent_of_code_0/advent_of_code_0.dart';
 
 void displayAdventOfCodeResponse({
   required int day,
@@ -13,9 +13,9 @@ void displayAdventOfCodeResponse({
 }
 
 void main(List<String> arguments) async {
-  final solver = DailySolver0(day: 0);
-  displayAdventOfCodeResponse(
-    day: 0,
-    part1Response: (await solver.solve(part: 1)),
-  );
+  // final solver = DailySolver0(day: 0);
+  // displayAdventOfCodeResponse(
+  //   day: 0,
+  //   part1Response: (await solver.solve(part: 1)),
+  // );
 }
