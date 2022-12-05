@@ -3,6 +3,8 @@
 ### --- 📆 Day 1: 🍫 Calorie Counting ---
 - ⭐️ Part 1: 74198
 - ⭐️ Part 2: 209914
+### --- 📆 Day 2: 🖖 Rock Paper Scissors ---
+- ⭐️ Part 1: 13484
 
 ## 📆 Create codebase for new Advent of Code day
 ```
