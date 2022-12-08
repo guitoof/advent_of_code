@@ -26,5 +26,6 @@ void main(List<String> arguments) async {
     day: 2,
     name: '🖖 Rock Paper Scissors',
     part1Response: (await solver2.solve(part: 1)),
+    part2Response: (await solver2.solve(part: 2)),
   );
 }

@@ -6,7 +6,7 @@ enum RockPaperScissors {
   paper,
   scissors;
 
-  static RockPaperScissors fromStringCode(String code) {
+  factory RockPaperScissors.fromStringCode(String code) {
     switch (code) {
       case 'A':
       case 'X':
@@ -41,6 +41,21 @@ enum MatchOutcome {
   lose,
   draw;
 
+  factory MatchOutcome.fromStringCode(String code) {
+    switch (code) {
+      case 'X':
+        return MatchOutcome.lose;
+      case 'Y':
+        return MatchOutcome.draw;
+      case 'Z':
+        return MatchOutcome.win;
+      default:
+        throw ArgumentError(
+          'Unsupported string code: $code, to parse $MatchOutcome',
+        );
+    }
+  }
+
   int get score {
     switch (this) {
       case MatchOutcome.win:
@@ -61,6 +76,53 @@ class RockPaperScissorsMatch {
     required this.player,
     required this.opponent,
   });
+
+  factory RockPaperScissorsMatch.fromOutcome(
+      {required opponent, required MatchOutcome outcome}) {
+    late RockPaperScissors player;
+    switch (opponent) {
+      case RockPaperScissors.rock:
+        switch (outcome) {
+          case MatchOutcome.win:
+            player = RockPaperScissors.paper;
+            break;
+          case MatchOutcome.draw:
+            player = RockPaperScissors.rock;
+            break;
+          case MatchOutcome.lose:
+            player = RockPaperScissors.scissors;
+            break;
+        }
+        break;
+      case RockPaperScissors.paper:
+        switch (outcome) {
+          case MatchOutcome.win:
+            player = RockPaperScissors.scissors;
+            break;
+          case MatchOutcome.draw:
+            player = RockPaperScissors.paper;
+            break;
+          case MatchOutcome.lose:
+            player = RockPaperScissors.rock;
+            break;
+        }
+        break;
+      case RockPaperScissors.scissors:
+        switch (outcome) {
+          case MatchOutcome.win:
+            player = RockPaperScissors.rock;
+            break;
+          case MatchOutcome.draw:
+            player = RockPaperScissors.scissors;
+            break;
+          case MatchOutcome.lose:
+            player = RockPaperScissors.paper;
+            break;
+        }
+        break;
+    }
+    return RockPaperScissorsMatch(player: player, opponent: opponent);
+  }
 
   MatchOutcome get outcome {
     if (player == opponent) {
@@ -90,13 +152,12 @@ class RockPaperScissorsMatch {
   String toString() => '[$player vs $opponent]: $outcome';
 }
 
-class DailySolver2 extends DailySolver<List<RockPaperScissors>>
+class DailySolver2 extends DailySolver<List<String>>
     with RockPaperScissorsGameManager {
   DailySolver2({required super.day});
 
   @override
-  List<RockPaperScissors> lineParser(String line) =>
-      line.split(' ').map(RockPaperScissors.fromStringCode).toList();
+  List<String> lineParser(String line) => line.split(' ').toList();
 
   @override
   Future<void> loadInputData({required DataSourceType ofType}) async {
@@ -108,16 +169,49 @@ class DailySolver2 extends DailySolver<List<RockPaperScissors>>
       {required int part,
       DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
+
+    switch (part) {
+      case 1:
+        loadMatchesFromHands();
+        break;
+      case 2:
+        loadMatchesFromHandAndOutcome();
+        break;
+      default:
+        throw ArgumentError('Unsupported part: $part');
+    }
+
     return getRockPaperScissorsScore();
   }
 }
 
-mixin RockPaperScissorsGameManager on DailySolver<List<RockPaperScissors>> {
+mixin RockPaperScissorsGameManager on DailySolver<List<String>> {
+  List<RockPaperScissorsMatch> _matches = [];
+
+  void loadMatchesFromHands() {
+    _matches = (inputData).map((items) {
+      final hands = items.map(RockPaperScissors.fromStringCode).toList();
+      return RockPaperScissorsMatch(
+        player: hands.last,
+        opponent: hands.first,
+      );
+    }).toList();
+  }
+
+  void loadMatchesFromHandAndOutcome() {
+    _matches = (inputData).map((items) {
+      final hand = RockPaperScissors.fromStringCode(items.first);
+      final outcome = MatchOutcome.fromStringCode(items.last);
+      return RockPaperScissorsMatch.fromOutcome(
+        opponent: hand,
+        outcome: outcome,
+      );
+    }).toList();
+  }
+
+  List<int> getScoreByMatch() => _matches.map((match) => match.score).toList();
+
   int getRockPaperScissorsScore() {
-    final matches = (inputData as List<List<RockPaperScissors>>)
-        .map((hands) =>
-            RockPaperScissorsMatch(player: hands.last, opponent: hands.first))
-        .toList();
-    return matches.fold<int>(0, (total, match) => total + match.score);
+    return _matches.fold<int>(0, (total, match) => total + match.score);
   }
 }
