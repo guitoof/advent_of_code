@@ -4,7 +4,16 @@
 ```
 mason make advent_of_code_day -o ./src/challenges
 ```
-and the matching test file
+
+Creates the following architecture:
+
 ```
-mason make advent_of_code_day_test -o ./test/challenges
+lib/
+    src/
+        challenges/
+            advent_of_code_{{day}}
+                data/
+                test/
+                    advent_of_code_{{day}}_test.dart
+                advent_of_code_{{day}}.dart
 ```

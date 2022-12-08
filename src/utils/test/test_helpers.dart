@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:test/scaffolding.dart';
-import '../src/utils/daily_solver.dart';
-import '../src/utils/data_source.dart';
+import '../daily_solver.dart';
+import '../data_source.dart';
 
 S castSolverType<S extends DailySolver>(DailySolver solver) {
   assert(solver is S, 'Solver is not of type $S');
