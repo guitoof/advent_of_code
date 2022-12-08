@@ -1,8 +1,8 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import '../../../src/challenges/advent_of_code_2/advent_of_code_2.dart';
-import '../../../src/utils/data_source.dart';
-import '../../test_helpers.dart';
+import '../advent_of_code_2.dart';
+import '../../../utils/data_source.dart';
+import '../../../utils/test/test_helpers.dart';
 
 void main() {
   dayTestGroup(
