@@ -20,7 +20,10 @@ void main() {
             },
             type: type,
             body: ({expectedData}) {
-              test('should return the score', () async {
+              test(
+                  '''should return the score if the 2nd column is the hand we should play''',
+                  () async {
+                solver2.loadMatchesFromHands();
                 expect(solver2.getRockPaperScissorsScore(), expectedData);
               });
             },
@@ -30,25 +33,38 @@ void main() {
       ),
       2: PartTestGroup(
         (solver, type) {
-          //final solver2 = castSolverType<DailySolver2>(solver);
-          // testGroupWithExpectedDataByType(
-          //   '[someMethod2] relevant to part 2',
-          //   expectedDataMap: {
-          //     DataSourceType.example: 'Expected Data for Example',
-          //     // Challenge case will be skipped
-          //     // if [DataSourceType.challenge] is missing (null)
-          //   },
-          //   type: type,
-          //   body: ({expectedData}) {
-          //     test('test some behavior of [someMethod2]', () async {
-          //       expect(solver2, isA<DailySolver2>());
-          //       // Use [expectedData] to test the behavior of [someMethod]
-          //       // expect(solver2.someMethod2(), expectedData);
-          //     });
-          //   },
-          // );
+          final solver2 = castSolverType<DailySolver2>(solver);
+          testGroupWithExpectedDataByType(
+            '[getScoreByMatch]',
+            expectedDataMap: {
+              DataSourceType.example: [4, 1, 7],
+            },
+            type: type,
+            body: ({expectedData}) {
+              test('''should return the score of each match,
+                  if the 2nd column is the expected outcome''', () async {
+                solver2.loadMatchesFromHandAndOutcome();
+                expect(solver2.getScoreByMatch(), expectedData);
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            '[getRockPaperScissorsScore]',
+            expectedDataMap: {
+              DataSourceType.example: 12,
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the score if the 2nd column is the expected outcome',
+                  () async {
+                solver2.loadMatchesFromHandAndOutcome();
+                expect(solver2.getRockPaperScissorsScore(), expectedData);
+              });
+            },
+          );
         },
-        skipTypes: [DataSourceType.challenge, DataSourceType.example],
+        skipTypes: [DataSourceType.challenge],
       ),
     },
   );
