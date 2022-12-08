@@ -4,12 +4,11 @@ class MissingImplementation extends Error {}
 
 class UnsupportedCase extends Error {}
 
-typedef InputType<T> = List<T>;
 typedef OutputType = int;
 
 class DailySolver<T> {
   int day;
-  late InputType inputData;
+  late List<T> inputData;
 
   DailySolver({required this.day});
 
