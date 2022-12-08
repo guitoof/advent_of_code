@@ -5,6 +5,7 @@
 - ⭐️ Part 2: 209914
 ### --- 📆 Day 2: 🖖 Rock Paper Scissors ---
 - ⭐️ Part 1: 13484
+- ⭐️ Part 2: 13433
 
 ## 📆 Create codebase for new Advent of Code day
 ```
