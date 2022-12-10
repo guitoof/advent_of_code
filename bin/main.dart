@@ -1,6 +1,7 @@
 import '../src/challenges/advent_of_code_1/advent_of_code_1.dart';
 import '../src/challenges/advent_of_code_2/advent_of_code_2.dart';
 import '../src/challenges/advent_of_code_3/advent_of_code_3.dart';
+import '../src/challenges/advent_of_code_4/advent_of_code_4.dart';
 
 void displayAdventOfCodeResponse({
   required int day,
@@ -37,5 +38,12 @@ void main(List<String> arguments) async {
     name: '🎒 Rucksack Reorganization',
     part1Response: (await solver3.solve(part: 1)),
     part2Response: (await solver3.solve(part: 2)),
+  );
+
+  final solver4 = DailySolver4(day: 4);
+  displayAdventOfCodeResponse(
+    day: 4,
+    name: '🧹 Camp Cleanup',
+    part1Response: (await solver4.solve(part: 1)),
   );
 }
