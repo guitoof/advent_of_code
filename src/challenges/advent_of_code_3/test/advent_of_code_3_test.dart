@@ -33,7 +33,7 @@ void main() {
             },
           );
           testGroupWithExpectedDataByType(
-            '[solve]',
+            '[solve(part: 1)]',
             expectedDataMap: {
               DataSourceType.example: 157,
               DataSourceType.challenge: 8298,
@@ -55,23 +55,71 @@ void main() {
         (solver, type) {
           final solver3 = castSolverType<DailySolver3>(solver);
           testGroupWithExpectedDataByType(
-            '[someMethod2] relevant to part 2',
+            '[getRucksacksContentByGroup]',
             expectedDataMap: {
-              DataSourceType.example: 'Expected Data for Example',
-              // Challenge case will be skipped
-              // if [DataSourceType.challenge] is missing (null)
+              DataSourceType.example: [
+                [
+                  'vJrwpWtwJgWrhcsFMMfFFhFp',
+                  'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+                  'PmmdzqPrVvPwwTWBwg',
+                ],
+                [
+                  'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+                  'ttgJtRGJQctTZtZT',
+                  'CrZsJsPPZsGzwwsLwLmpwMDw',
+                ]
+              ],
             },
             type: type,
             body: ({expectedData}) {
-              test('test some behavior of [someMethod2]', () async {
-                expect(solver3, isA<DailySolver3>());
-                // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver3.someMethod2(), expectedData);
+              test('should return all rucksacks by group', () async {
+                expect(solver3.getRucksacksContentByGroup(), expectedData);
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            '[getBadgesByGroup]',
+            expectedDataMap: {
+              DataSourceType.example: ['r', 'Z'],
+            },
+            type: type,
+            body: ({expectedData}) {
+              test('should return all badges item by group', () async {
+                expect(solver3.getBadgesByGroup(), expectedData);
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            '[getBadgePrioritiesByGroup]',
+            expectedDataMap: {
+              DataSourceType.example: [18, 52],
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the priorities all badges priority for all groups',
+                  () async {
+                expect(solver3.getBadgePrioritiesByGroup(), expectedData);
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            '[solve(part: 2)]',
+            expectedDataMap: {
+              DataSourceType.example: 70,
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the sum of all badges priority for all groups',
+                  () async {
+                expect(
+                    await solver3.solve(part: 2, forType: type), expectedData);
               });
             },
           );
         },
-        skipTypes: [DataSourceType.challenge, DataSourceType.example],
+        skipTypes: [DataSourceType.challenge],
       ),
     },
   );
