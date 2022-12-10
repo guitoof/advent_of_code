@@ -36,5 +36,6 @@ void main(List<String> arguments) async {
     day: 3,
     name: '🎒 Rucksack Reorganization',
     part1Response: (await solver3.solve(part: 1)),
+    part2Response: (await solver3.solve(part: 2)),
   );
 }

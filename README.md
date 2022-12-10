@@ -7,6 +7,10 @@
 - ⭐️ Part 1: 13484
 - ⭐️ Part 2: 13433
 
+### --- 📆 Day 3: 🎒 Rucksack Reorganization ---
+- ⭐️ Part 1: 8298
+- ⭐️ Part 2: 2708
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
