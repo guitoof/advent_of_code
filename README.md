@@ -11,6 +11,9 @@
 - ⭐️ Part 1: 8298
 - ⭐️ Part 2: 2708
 
+### --- 📆 Day 4: 🧹 Camp Cleanup ---
+
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
