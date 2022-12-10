@@ -12,7 +12,8 @@
 - ⭐️ Part 2: 2708
 
 ### --- 📆 Day 4: 🧹 Camp Cleanup ---
-
+⭐️ Part 1: 477
+⭐️ Part 2: 830
 
 ## 📆 Create codebase for new Advent of Code day
 ```

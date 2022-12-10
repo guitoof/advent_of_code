@@ -25,7 +25,14 @@ class DailySolver4 extends DailySolver<List<List<int>>>
       DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
-    return countFullyContainedPairs;
+    switch (part) {
+      case 1:
+        return countFullyContainedPairs;
+      case 2:
+        return countOverlappingPairs;
+      default:
+        throw Exception('Invalid part: $part');
+    }
   }
 }
 
@@ -51,6 +58,12 @@ class CleaningPair {
       range1.contains(range2.start) && range1.contains(range2.end) ||
       range2.contains(range1.start) && range2.contains(range1.end);
 
+  bool get isOverlapping =>
+      range1.contains(range2.start) ||
+      range1.contains(range2.end) ||
+      range2.contains(range1.start) ||
+      range2.contains(range1.end);
+
   @override
   String toString() => '[$range1, $range2]';
 }
@@ -68,8 +81,9 @@ mixin CampCleaningManager on DailySolver<List<List<int>>> {
         .toList();
   }
 
-  int get countFullyContainedPairs {
-    return cleaningPairs.fold(
-        0, (count, pair) => count + (pair.isFullyContained ? 1 : 0));
-  }
+  int get countFullyContainedPairs => cleaningPairs.fold(
+      0, (count, pair) => count + (pair.isFullyContained ? 1 : 0));
+
+  int get countOverlappingPairs => cleaningPairs.fold(
+      0, (count, pair) => count + (pair.isOverlapping ? 1 : 0));
 }

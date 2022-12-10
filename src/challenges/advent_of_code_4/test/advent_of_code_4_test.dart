@@ -32,21 +32,19 @@ void main() {
         (solver, type) {
           final solver4 = castSolverType<DailySolver4>(solver);
           testGroupWithExpectedDataByType(
-            '[someMethod2] relevant to part 2',
+            '[countOverlappingPairs]',
             expectedDataMap: {
-              DataSourceType.example: 'Expected Data for Example',
+              DataSourceType.example: 4,
             },
             type: type,
             body: ({expectedData}) {
-              test('test some behavior of [someMethod2]', () async {
-                expect(solver4, isA<DailySolver4>());
-                // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver4.someMethod2(), expectedData);
+              test('should return the count of overlapping pairs', () async {
+                expect(solver4.countOverlappingPairs, expectedData);
               });
             },
           );
         },
-        skipTypes: [DataSourceType.challenge, DataSourceType.example],
+        skipTypes: [DataSourceType.challenge],
       ),
     },
   );
