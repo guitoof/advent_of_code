@@ -45,10 +45,10 @@ void main(List<String> arguments) async {
     part2Response: (await DailySolver4(day: 4, part: 2).solve()),
   );
 
-  final solver5 = DailySolver5(day: 5);
   displayAdventOfCodeResponse(
     day: 5,
     name: '📦 Supply Stacks',
-    part1Response: (await solver5.solve(part: 1)),
+    part1Response: (await DailySolver5(day: 5, part: 1).solve()),
+    part2Response: (await DailySolver5(day: 5, part: 2).solve()),
   );
 }

@@ -17,6 +17,7 @@
 
 ### --- 📆 Day 5: 📦 Supply Stacks ---
 ⭐️ Part 1: SHMSDGZVC
+⭐️ Part 2: VRZGHDFBQ
 
 ## 📆 Create codebase for new Advent of Code day
 ```

@@ -7,7 +7,7 @@ import '../../../utils/test/test_helpers.dart';
 void main() {
   dayTestGroup(
     'Day 5',
-    solverBuilder: () => DailySolver5(day: 5),
+    solverBuilder: ({required part}) => DailySolver5(day: 5, part: part),
     partTestGroups: {
       1: PartTestGroup(
         (solver, type) {
@@ -78,6 +78,7 @@ void main() {
             '[getRearrangedTopCratesLabels]',
             expectedDataMap: {
               DataSourceType.example: 'CMZ',
+              DataSourceType.challenge: 'SHMSDGZVC',
             },
             type: type,
             body: ({expectedData}) {
@@ -89,30 +90,29 @@ void main() {
             },
           );
         },
-        skipTypes: [DataSourceType.challenge],
+        skipTypes: [],
       ),
-      // 2: PartTestGroup(
-      //   (solver, type) {
-      //     final solver5 = castSolverType<DailySolver5>(solver);
-      //     testGroupWithExpectedDataByType(
-      //       '[someMethod2] relevant to part 2',
-      //       expectedDataMap: {
-      //         DataSourceType.example: 'Expected Data for Example',
-      //         // Challenge case will be skipped
-      //         // if [DataSourceType.challenge] is missing (null)
-      //       },
-      //       type: type,
-      //       body: ({expectedData}) {
-      //         test('test some behavior of [someMethod2]', () async {
-      //           expect(solver5, isA<DailySolver5>());
-      //           // Use [expectedData] to test the behavior of [someMethod]
-      //           // expect(solver5.someMethod2(), expectedData);
-      //         });
-      //       },
-      //     );
-      //   },
-      //   skipTypes: [DataSourceType.challenge, DataSourceType.example],
-      // ),
+      2: PartTestGroup(
+        (solver, type) {
+          final solver5 = castSolverType<DailySolver5>(solver);
+          testGroupWithExpectedDataByType(
+            '[getRearrangedTopCratesLabels]',
+            expectedDataMap: {
+              DataSourceType.example: 'MCD',
+              DataSourceType.challenge: 'VRZGHDFBQ',
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the labels of all the top cranes after rearrangement',
+                  () async {
+                expect(solver5.getRearrangedTopCratesLabels(), expectedData);
+              });
+            },
+          );
+        },
+        skipTypes: [],
+      ),
     },
   );
 }
