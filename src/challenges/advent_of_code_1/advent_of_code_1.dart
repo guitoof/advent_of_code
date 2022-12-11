@@ -5,7 +5,7 @@ import '../../utils/data_source.dart';
 
 class DailySolver1 extends DailySolver<String, int>
     with FoodPayloadCalorieManager {
-  DailySolver1({required super.day});
+  DailySolver1({required super.day, required super.part});
 
   @override
   String lineParser(String line) => line;
@@ -25,9 +25,7 @@ class DailySolver1 extends DailySolver<String, int>
   }
 
   @override
-  Future<int> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+  Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
     switch (part) {
       case 0:

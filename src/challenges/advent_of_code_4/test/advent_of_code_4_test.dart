@@ -7,7 +7,7 @@ import '../../../utils/test/test_helpers.dart';
 void main() {
   dayTestGroup(
     'Day 4',
-    solverBuilder: () => DailySolver4(day: 4),
+    solverBuilder: ({required part}) => DailySolver4(day: 4, part: part),
     partTestGroups: {
       1: PartTestGroup(
         (solver, type) {
@@ -20,8 +20,7 @@ void main() {
             type: type,
             body: ({expectedData}) {
               test('return the count of fully contained pairs', () async {
-                expect(
-                    await solver4.solve(part: 1, forType: type), expectedData);
+                expect(await solver4.solve(forType: type), expectedData);
               });
             },
           );
