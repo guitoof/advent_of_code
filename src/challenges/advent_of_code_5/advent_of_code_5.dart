@@ -4,7 +4,7 @@ import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
 class DailySolver5 extends DailySolver<String, String> with GiantCargoCrane {
-  DailySolver5({required super.day});
+  DailySolver5({required super.day, required super.part});
 
   @override
   String lineParser(String line) => line;
@@ -23,20 +23,25 @@ class DailySolver5 extends DailySolver<String, String> with GiantCargoCrane {
     rearrangementProcedure = RearrangementProcedure.fromRawData(
       inputData.sublist(sectionSeparatorIndex + 1),
     );
+
+    switch (part) {
+      case 1:
+        crateMover = CrateMover9000();
+        break;
+      case 2:
+        crateMover = CrateMover9001();
+        break;
+      default:
+        throw Exception('Unsupported part: $part');
+    }
   }
 
   @override
   Future<String> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+      {DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
-    switch (part) {
-      case 1:
-        return getRearrangedTopCratesLabels();
-      default:
-        throw Exception('Invalid part: $part');
-    }
+    return getRearrangedTopCratesLabels();
   }
 }
 
@@ -93,25 +98,6 @@ class CargoBay extends Equatable {
 
   List<Crate> get topLevelCrates {
     return _stacks.values.map((stack) => stack._crates.last).toList();
-  }
-
-  void rearrange(RearrangementProcedure procedure) {
-    for (var instruction in procedure.instructions) {
-      final sourceStack = _stacks[instruction.sourceIndex];
-      final destinationStack = _stacks[instruction.destinationIndex];
-      if (sourceStack == null || destinationStack == null) {
-        throw Exception(
-          'Cannot find source stack at: ${instruction.sourceIndex} or destination stack at: ${instruction.destinationIndex}',
-        );
-      }
-      final cratesToMove = sourceStack._crates
-          .sublist(sourceStack._crates.length - instruction.quantity);
-      destinationStack._crates.addAll(cratesToMove.reversed);
-      sourceStack._crates.removeRange(
-        sourceStack._crates.length - instruction.quantity,
-        sourceStack._crates.length,
-      );
-    }
   }
 
   @override
@@ -216,8 +202,47 @@ class RearrangementInstruction {
       'Move ($quantity) from ($sourceIndex) to ($destinationIndex)';
 }
 
+abstract class CrateMover {
+  bool get canMoveMultipleCrates;
+
+  CargoBay rearrangeCrates({
+    required CargoBay cargoBay,
+    required RearrangementProcedure procedure,
+  }) {
+    for (var instruction in procedure.instructions) {
+      final sourceStack = cargoBay._stacks[instruction.sourceIndex];
+      final destinationStack = cargoBay._stacks[instruction.destinationIndex];
+      if (sourceStack == null || destinationStack == null) {
+        throw Exception(
+          'Cannot find source stack at: ${instruction.sourceIndex} or destination stack at: ${instruction.destinationIndex}',
+        );
+      }
+      final cratesToMove = sourceStack._crates
+          .sublist(sourceStack._crates.length - instruction.quantity);
+      destinationStack._crates
+          .addAll(canMoveMultipleCrates ? cratesToMove : cratesToMove.reversed);
+      sourceStack._crates.removeRange(
+        sourceStack._crates.length - instruction.quantity,
+        sourceStack._crates.length,
+      );
+    }
+    return cargoBay;
+  }
+}
+
+class CrateMover9000 extends CrateMover {
+  @override
+  bool get canMoveMultipleCrates => false;
+}
+
+class CrateMover9001 extends CrateMover {
+  @override
+  bool get canMoveMultipleCrates => true;
+}
+
 mixin GiantCargoCrane {
   late CargoBay cargoBay;
+  late CrateMover crateMover;
   late RearrangementProcedure rearrangementProcedure;
 
   String getInitialTopCratesLabels() {
@@ -225,7 +250,10 @@ mixin GiantCargoCrane {
   }
 
   String getRearrangedTopCratesLabels() {
-    cargoBay.rearrange(rearrangementProcedure);
+    crateMover.rearrangeCrates(
+      cargoBay: cargoBay,
+      procedure: rearrangementProcedure,
+    );
     return cargoBay.topLevelCrates.map((crate) => crate.label).join('');
   }
 }
