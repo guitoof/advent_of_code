@@ -11,13 +11,14 @@ S castSolverType<S extends DailySolver>(DailySolver solver) {
 @isTestGroup
 void dayTestGroup(
   String description, {
-  required DailySolver Function() solverBuilder,
+  required DailySolver Function({required int part}) solverBuilder,
   required Map<int, PartTestGroup> partTestGroups,
 }) {
   group(description, () {
     partTestGroups.forEach((key, value) {
       partTestGroup('Part $key', value.body,
-          solverBuilder: solverBuilder, skipTypes: value.skipTypes);
+          solverBuilder: () => solverBuilder(part: key),
+          skipTypes: value.skipTypes);
     });
   });
 }
