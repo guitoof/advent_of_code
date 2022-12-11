@@ -1,9 +1,9 @@
 import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
-class DailySolver{{ day }} extends DailySolver<String>
+class DailySolver{{ day }} extends DailySolver<String, int>
     with SomeMixinWithChallengeLogic {
-  DailySolver{{ day }}({required super.day});
+  DailySolver{{ day }}({required super.day, required super.part});
 
   @override
   String lineParser(String line) => line; // CHANGE HERE
@@ -16,9 +16,8 @@ class DailySolver{{ day }} extends DailySolver<String>
   }
 
   @override
-  Future<OutputType> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+  Future<int> solve(
+      {DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
     /// ACTUALLY SOLVE THE CHALLENGE HERE
