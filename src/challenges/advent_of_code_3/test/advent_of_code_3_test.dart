@@ -7,7 +7,7 @@ import '../../../utils/test/test_helpers.dart';
 void main() {
   dayTestGroup(
     'Day 3',
-    solverBuilder: () => DailySolver3(day: 3),
+    solverBuilder: ({required part}) => DailySolver3(day: 3, part: part),
     partTestGroups: {
       1: PartTestGroup(
         (solver, type) {
@@ -43,8 +43,7 @@ void main() {
               test(
                   '''should return the sum of the priority of each item appearing in both compartments''',
                   () async {
-                expect(
-                    await solver3.solve(part: 1, forType: type), expectedData);
+                expect(await solver3.solve(forType: type), expectedData);
               });
             },
           );
@@ -113,8 +112,7 @@ void main() {
               test(
                   'should return the sum of all badges priority for all groups',
                   () async {
-                expect(
-                    await solver3.solve(part: 2, forType: type), expectedData);
+                expect(await solver3.solve(forType: type), expectedData);
               });
             },
           );

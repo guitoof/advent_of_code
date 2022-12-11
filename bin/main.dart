@@ -16,35 +16,31 @@ void displayAdventOfCodeResponse({
 }
 
 void main(List<String> arguments) async {
-  final solver1 = DailySolver1(day: 1);
   displayAdventOfCodeResponse(
     day: 1,
     name: '🍫 Calorie Counting',
-    part1Response: (await solver1.solve(part: 1)),
-    part2Response: (await solver1.solve(part: 2)),
+    part1Response: (await DailySolver1(day: 1, part: 1).solve()),
+    part2Response: (await DailySolver1(day: 1, part: 2).solve()),
   );
 
-  final solver2 = DailySolver2(day: 2);
   displayAdventOfCodeResponse(
     day: 2,
     name: '🖖 Rock Paper Scissors',
-    part1Response: (await solver2.solve(part: 1)),
-    part2Response: (await solver2.solve(part: 2)),
+    part1Response: (await DailySolver2(day: 2, part: 1).solve()),
+    part2Response: (await DailySolver2(day: 2, part: 2).solve()),
   );
 
-  final solver3 = DailySolver3(day: 3);
   displayAdventOfCodeResponse(
     day: 3,
     name: '🎒 Rucksack Reorganization',
-    part1Response: (await solver3.solve(part: 1)),
-    part2Response: (await solver3.solve(part: 2)),
+    part1Response: (await DailySolver3(day: 3, part: 1).solve()),
+    part2Response: (await DailySolver3(day: 3, part: 2).solve()),
   );
 
-  final solver4 = DailySolver4(day: 4);
   displayAdventOfCodeResponse(
     day: 4,
     name: '🧹 Camp Cleanup',
-    part1Response: (await solver4.solve(part: 1)),
-    part2Response: (await solver4.solve(part: 2)),
+    part1Response: (await DailySolver4(day: 4, part: 1).solve()),
+    part2Response: (await DailySolver4(day: 4, part: 2).solve()),
   );
 }

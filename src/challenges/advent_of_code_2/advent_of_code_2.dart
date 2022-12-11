@@ -154,7 +154,7 @@ class RockPaperScissorsMatch {
 
 class DailySolver2 extends DailySolver<List<String>, int>
     with RockPaperScissorsGameManager {
-  DailySolver2({required super.day});
+  DailySolver2({required super.day, required super.part});
 
   @override
   List<String> lineParser(String line) => line.split(' ').toList();
@@ -165,9 +165,7 @@ class DailySolver2 extends DailySolver<List<String>, int>
   }
 
   @override
-  Future<int> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+  Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
     switch (part) {

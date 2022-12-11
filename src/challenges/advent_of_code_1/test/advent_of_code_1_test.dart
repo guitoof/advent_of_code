@@ -7,7 +7,7 @@ import '../../../utils/test/test_helpers.dart';
 void main() {
   dayTestGroup(
     'Day 1',
-    solverBuilder: () => DailySolver1(day: 1),
+    solverBuilder: ({required part}) => DailySolver1(day: 1, part: part),
     partTestGroups: {
       1: PartTestGroup(
         (solver, type) {

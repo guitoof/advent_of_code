@@ -3,7 +3,7 @@ import '../../utils/data_source.dart';
 
 class DailySolver4 extends DailySolver<List<List<int>>, int>
     with CampCleaningManager {
-  DailySolver4({required super.day});
+  DailySolver4({required super.day, required super.part});
 
   @override
   List<List<int>> lineParser(String line) => line
@@ -20,9 +20,7 @@ class DailySolver4 extends DailySolver<List<List<int>>, int>
   }
 
   @override
-  Future<int> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+  Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
     switch (part) {
