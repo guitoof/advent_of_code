@@ -7,9 +7,10 @@ typedef OutputType = int;
 
 class DailySolver<T, O> {
   int day;
-  late InputType inputData;
+  int part;
+  late List<T> inputData;
 
-  DailySolver({required this.day});
+  DailySolver({required this.day, required this.part});
 
   /// IMPLEMENT
   T lineParser(String line) => throw MissingImplementation();
@@ -26,5 +27,5 @@ class DailySolver<T, O> {
 
   /// IMPLEMENT
   /// Must call super.loadInputData
-  Future<O> solve({required int part}) => throw MissingImplementation();
+  Future<O> solve() => throw MissingImplementation();
 }
