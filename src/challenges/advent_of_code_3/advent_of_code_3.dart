@@ -1,7 +1,7 @@
 import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
-class DailySolver3 extends DailySolver<Rucksack> with RucksackCleanPacker {
+class DailySolver3 extends DailySolver<Rucksack, int> with RucksackCleanPacker {
   DailySolver3({required super.day});
 
   @override
@@ -17,7 +17,7 @@ class DailySolver3 extends DailySolver<Rucksack> with RucksackCleanPacker {
   }
 
   @override
-  Future<OutputType> solve(
+  Future<int> solve(
       {required int part,
       DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
@@ -122,7 +122,7 @@ Map<String, int> generateIndexedAlphabeticMap(
         .asMap()
         .map((index, letter) => MapEntry(letter, index + 1 + indexOffset));
 
-mixin RucksackCleanPacker on DailySolver<Rucksack> {
+mixin RucksackCleanPacker on DailySolver<Rucksack, int> {
   List<Rucksack> _rucksacks = <Rucksack>[];
   loadRucksack() {
     _rucksacks = inputData;

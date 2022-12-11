@@ -152,7 +152,7 @@ class RockPaperScissorsMatch {
   String toString() => '[$player vs $opponent]: $outcome';
 }
 
-class DailySolver2 extends DailySolver<List<String>>
+class DailySolver2 extends DailySolver<List<String>, int>
     with RockPaperScissorsGameManager {
   DailySolver2({required super.day});
 
@@ -165,7 +165,7 @@ class DailySolver2 extends DailySolver<List<String>>
   }
 
   @override
-  Future<OutputType> solve(
+  Future<int> solve(
       {required int part,
       DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
@@ -185,7 +185,7 @@ class DailySolver2 extends DailySolver<List<String>>
   }
 }
 
-mixin RockPaperScissorsGameManager on DailySolver<List<String>> {
+mixin RockPaperScissorsGameManager on DailySolver<List<String>, int> {
   List<RockPaperScissorsMatch> _matches = [];
 
   void loadMatchesFromHands() {
