@@ -15,6 +15,9 @@
 ⭐️ Part 1: 477
 ⭐️ Part 2: 830
 
+### --- 📆 Day 5: 📦 Supply Stacks ---
+⭐️ Part 1: SHMSDGZVC
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
