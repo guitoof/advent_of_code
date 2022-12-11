@@ -2,7 +2,7 @@ import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
 class DailySolver3 extends DailySolver<Rucksack, int> with RucksackCleanPacker {
-  DailySolver3({required super.day});
+  DailySolver3({required super.day, required super.part});
 
   @override
   Rucksack lineParser(String line) => Rucksack({
@@ -17,9 +17,7 @@ class DailySolver3 extends DailySolver<Rucksack, int> with RucksackCleanPacker {
   }
 
   @override
-  Future<int> solve(
-      {required int part,
-      DataSourceType forType = DataSourceType.challenge}) async {
+  Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
     switch (part) {
       case 1:
