@@ -2,6 +2,7 @@ import '../src/challenges/advent_of_code_1/advent_of_code_1.dart';
 import '../src/challenges/advent_of_code_2/advent_of_code_2.dart';
 import '../src/challenges/advent_of_code_3/advent_of_code_3.dart';
 import '../src/challenges/advent_of_code_4/advent_of_code_4.dart';
+import '../src/challenges/advent_of_code_5/advent_of_code_5.dart';
 
 void displayAdventOfCodeResponse({
   required int day,
@@ -42,5 +43,12 @@ void main(List<String> arguments) async {
     name: '🧹 Camp Cleanup',
     part1Response: (await DailySolver4(day: 4, part: 1).solve()),
     part2Response: (await DailySolver4(day: 4, part: 2).solve()),
+  );
+
+  final solver5 = DailySolver5(day: 5);
+  displayAdventOfCodeResponse(
+    day: 5,
+    name: '📦 Supply Stacks',
+    part1Response: (await solver5.solve(part: 1)),
   );
 }
