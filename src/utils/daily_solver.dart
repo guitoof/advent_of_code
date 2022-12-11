@@ -5,7 +5,7 @@ class MissingImplementation extends Error {}
 typedef InputType<T> = List<T>;
 typedef OutputType = int;
 
-class DailySolver<T> {
+class DailySolver<T, O> {
   int day;
   late InputType inputData;
 
@@ -26,6 +26,5 @@ class DailySolver<T> {
 
   /// IMPLEMENT
   /// Must call super.loadInputData
-  Future<OutputType> solve({required int part}) =>
-      throw MissingImplementation();
+  Future<O> solve({required int part}) => throw MissingImplementation();
 }
