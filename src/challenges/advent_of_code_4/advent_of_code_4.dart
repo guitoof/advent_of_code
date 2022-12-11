@@ -1,7 +1,7 @@
 import '../../utils/daily_solver.dart';
 import '../../utils/data_source.dart';
 
-class DailySolver4 extends DailySolver<List<List<int>>>
+class DailySolver4 extends DailySolver<List<List<int>>, int>
     with CampCleaningManager {
   DailySolver4({required super.day});
 
@@ -20,7 +20,7 @@ class DailySolver4 extends DailySolver<List<List<int>>>
   }
 
   @override
-  Future<OutputType> solve(
+  Future<int> solve(
       {required int part,
       DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
@@ -68,7 +68,7 @@ class CleaningPair {
   String toString() => '[$range1, $range2]';
 }
 
-mixin CampCleaningManager on DailySolver<List<List<int>>> {
+mixin CampCleaningManager on DailySolver<List<List<int>>, int> {
   List<CleaningPair> cleaningPairs = [];
   loadCleaningAssignments() {
     cleaningPairs = inputData
