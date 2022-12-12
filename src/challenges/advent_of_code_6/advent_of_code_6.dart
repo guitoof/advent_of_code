@@ -20,14 +20,21 @@ class DailySolver6 extends DailySolver<String, int>
 
     final signal = inputData.first;
 
-    return StartOfPacketMarkerSubroutine.getDataCountToFirstMarker(signal);
+    switch (part) {
+      case 1:
+        return StartOfPacketMarkerSubroutine.getFirstPacketSize(signal);
+      case 2:
+        return StartOfPacketMarkerSubroutine.getFirstMessageSize(signal);
+      default:
+        throw Exception('Unsupported part: $part');
+    }
   }
 }
 
-class Packet {
+class MarkerCandidate {
   final String data;
 
-  Packet(this.data);
+  MarkerCandidate(this.data);
 
   bool get isMarker {
     final chars = data.split('');
@@ -36,16 +43,40 @@ class Packet {
   }
 }
 
-mixin StartOfPacketMarkerSubroutine {
-  static final int _packetSize = 4;
+abstract class MarkerDetector {
+  int get scopeSize;
 
-  static int getDataCountToFirstMarker(String signal) {
+  int getFirstMarkerCursor(String signal) {
     for (var cursor = 0; cursor < signal.length; cursor++) {
-      final packet = Packet(signal.substring(cursor, cursor + _packetSize));
-      if (packet.isMarker) {
-        return cursor + _packetSize;
+      final candidate =
+          MarkerCandidate(signal.substring(cursor, cursor + scopeSize));
+      if (candidate.isMarker) {
+        return cursor;
       }
     }
     return -1;
+  }
+
+  int getFirstDataPieceSize(String signal) =>
+      getFirstMarkerCursor(signal) + scopeSize;
+}
+
+class PacketMarkerDetector extends MarkerDetector {
+  @override
+  int get scopeSize => 4;
+}
+
+class MessageMarkerDetector extends MarkerDetector {
+  @override
+  int get scopeSize => 14;
+}
+
+mixin StartOfPacketMarkerSubroutine {
+  static int getFirstPacketSize(String signal) {
+    return PacketMarkerDetector().getFirstDataPieceSize(signal);
+  }
+
+  static int getFirstMessageSize(String signal) {
+    return MessageMarkerDetector().getFirstDataPieceSize(signal);
   }
 }

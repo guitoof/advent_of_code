@@ -23,10 +23,11 @@ void main() {
             type: type,
             body: ({expectedData}) {
               test(
-                  'should return true if the packet contains only different characters',
+                  'should return true if the "packet" contains only different characters',
                   () async {
                 for (var item in expectedData) {
-                  expect(Packet(item['input']).isMarker, item['output']);
+                  expect(
+                      MarkerCandidate(item['input']).isMarker, item['output']);
                 }
               });
             },
@@ -48,7 +49,7 @@ void main() {
                   () async {
                 for (var item in expectedData) {
                   expect(
-                      StartOfPacketMarkerSubroutine.getDataCountToFirstMarker(
+                      StartOfPacketMarkerSubroutine.getFirstPacketSize(
                           item['input']),
                       item['output']);
                 }
@@ -64,7 +65,7 @@ void main() {
             type: type,
             body: ({expectedData}) {
               test(
-                  'should return the count of characters before the 1st marker is received',
+                  'should return the count of characters before the 1st packet marker is received',
                   () async {
                 expect(await solver6.solve(forType: type), expectedData);
               });
@@ -77,23 +78,66 @@ void main() {
         (solver, type) {
           final solver6 = castSolverType<DailySolver6>(solver);
           testGroupWithExpectedDataByType(
-            '[someMethod2] relevant to part 2',
+            'Message.isMarker',
             expectedDataMap: {
-              DataSourceType.example: 'Expected Data for Example',
-              // Challenge case will be skipped
-              // if [DataSourceType.challenge] is missing (null)
+              DataSourceType.example: [
+                {'input': 'pqmgbljsphdztn', 'output': false},
+                {'input': 'qmgbljsphdztnv', 'output': true},
+              ],
             },
             type: type,
             body: ({expectedData}) {
-              test('test some behavior of [someMethod2]', () async {
-                expect(solver6, isA<DailySolver6>());
-                // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver6.someMethod2(), expectedData);
+              test(
+                  'should return true if the "message" contains only different characters',
+                  () async {
+                for (var item in expectedData) {
+                  expect(
+                      MarkerCandidate(item['input']).isMarker, item['output']);
+                }
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            'getDataCountToFirstMarker',
+            expectedDataMap: {
+              DataSourceType.example: [
+                {'input': 'bvwbjplbgvbhsrlpgdmjqwftvncz', 'output': 23},
+                {'input': 'nppdvjthqldpwncqszvftbrmjlhg', 'output': 23},
+                {'input': 'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg', 'output': 29},
+                {'input': 'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw', 'output': 26},
+              ],
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the count of characters before the 1st marker is received',
+                  () async {
+                for (var item in expectedData) {
+                  expect(
+                      StartOfPacketMarkerSubroutine.getFirstMessageSize(
+                          item['input']),
+                      item['output']);
+                }
+              });
+            },
+          );
+          testGroupWithExpectedDataByType(
+            '[solve]',
+            expectedDataMap: {
+              DataSourceType.example: 19,
+              DataSourceType.challenge: 3716,
+            },
+            type: type,
+            body: ({expectedData}) {
+              test(
+                  'should return the count of characters before the 1st message marker is received',
+                  () async {
+                expect(await solver6.solve(forType: type), expectedData);
               });
             },
           );
         },
-        skipTypes: [DataSourceType.challenge, DataSourceType.example],
+        skipTypes: [DataSourceType.challenge],
       ),
     },
   );
