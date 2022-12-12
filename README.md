@@ -21,6 +21,7 @@
 
 ### --- 📆 Day 6: 📡 Tuning Trouble ---
 ⭐️ Part 1: 1287
+⭐️ Part 2: 3716
 
 ## 📆 Create codebase for new Advent of Code day
 ```

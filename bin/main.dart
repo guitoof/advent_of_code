@@ -57,5 +57,6 @@ void main(List<String> arguments) async {
     day: 6,
     name: '📡 Tuning Trouble',
     part1Response: (await DailySolver6(day: 6, part: 1).solve()),
+    part2Response: (await DailySolver6(day: 6, part: 2).solve()),
   );
 }
