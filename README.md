@@ -23,6 +23,9 @@
 ⭐️ Part 1: 1287
 ⭐️ Part 2: 3716
 
+### --- 📆 Day 7: 💾 No Space Left On Device ---
+⭐️ Part 1: 1084134
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges

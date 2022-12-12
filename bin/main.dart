@@ -4,6 +4,7 @@ import '../src/challenges/advent_of_code_3/advent_of_code_3.dart';
 import '../src/challenges/advent_of_code_4/advent_of_code_4.dart';
 import '../src/challenges/advent_of_code_5/advent_of_code_5.dart';
 import '../src/challenges/advent_of_code_6/advent_of_code_6.dart';
+import '../src/challenges/advent_of_code_7/advent_of_code_7.dart';
 
 void displayAdventOfCodeResponse({
   required int day,
@@ -58,5 +59,10 @@ void main(List<String> arguments) async {
     name: '📡 Tuning Trouble',
     part1Response: (await DailySolver6(day: 6, part: 1).solve()),
     part2Response: (await DailySolver6(day: 6, part: 2).solve()),
+  );
+  displayAdventOfCodeResponse(
+    day: 7,
+    name: '💾 No Space Left On Device',
+    part1Response: (await DailySolver7(day: 7, part: 1).solve()),
   );
 }
