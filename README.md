@@ -19,6 +19,9 @@
 ⭐️ Part 1: SHMSDGZVC
 ⭐️ Part 2: VRZGHDFBQ
 
+### --- 📆 Day 6: 📡 Tuning Trouble ---
+⭐️ Part 1: 1287
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
