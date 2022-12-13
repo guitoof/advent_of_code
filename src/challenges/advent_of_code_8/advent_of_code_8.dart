@@ -18,7 +18,14 @@ class DailySolver8 extends DailySolver<List<int>, int> with ForestMap {
   @override
   Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
-    return countVisibleTrees();
+    switch (part) {
+      case 1:
+        return countVisibleTrees();
+      case 2:
+        return getBestScenicScore();
+      default:
+        throw Exception('Unsupported part: $part');
+    }
   }
 }
 
@@ -79,5 +86,68 @@ mixin ForestMap {
     }
     final perimeter = 2 * (forestMap.first.length + forestMap.length - 2);
     return count + perimeter;
+  }
+
+  int getViewingDistanceLeft(int row, int col) {
+    int distance = 0;
+    for (var x = col - 1; x >= 0; x--) {
+      if (forestMap[row][x] >= forestMap[row][col]) {
+        return ++distance;
+      }
+      distance++;
+    }
+    return distance;
+  }
+
+  int getViewingDistanceRight(int row, int col) {
+    int distance = 0;
+    for (var x = col + 1; x <= forestMap.first.length - 1; x++) {
+      if (forestMap[row][x] >= forestMap[row][col]) {
+        return ++distance;
+      }
+      distance++;
+    }
+    return distance;
+  }
+
+  int getViewingDistanceUp(int row, int col) {
+    int distance = 0;
+    for (var y = row - 1; y >= 0; y--) {
+      if (forestMap[y][col] >= forestMap[row][col]) {
+        return ++distance;
+      }
+      distance++;
+    }
+    return distance;
+  }
+
+  int getViewingDistanceDown(int row, int col) {
+    int distance = 0;
+    for (var y = row + 1; y <= forestMap.length - 1; y++) {
+      if (forestMap[y][col] >= forestMap[row][col]) {
+        return ++distance;
+      }
+      distance++;
+    }
+    return distance;
+  }
+
+  int getScenicScore(int row, int col) =>
+      getViewingDistanceLeft(row, col) *
+      getViewingDistanceRight(row, col) *
+      getViewingDistanceUp(row, col) *
+      getViewingDistanceDown(row, col);
+
+  int getBestScenicScore() {
+    int bestScore = 0;
+    for (var x = 1; x < forestMap.first.length - 1; x++) {
+      for (var y = 1; y < forestMap.length - 1; y++) {
+        final score = getScenicScore(y, x);
+        if (score > bestScore) {
+          bestScore = score;
+        }
+      }
+    }
+    return bestScore;
   }
 }

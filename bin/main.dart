@@ -71,5 +71,6 @@ void main(List<String> arguments) async {
     day: 8,
     name: '🌲 Treetop Tree House',
     part1Response: (await DailySolver8(day: 8, part: 1).solve()),
+    part2Response: (await DailySolver8(day: 8, part: 2).solve()),
   );
 }
