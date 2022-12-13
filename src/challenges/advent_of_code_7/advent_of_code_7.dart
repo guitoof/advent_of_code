@@ -10,19 +10,29 @@ class DailySolver7 extends DailySolver<String, int> with FileSystemAnalyzer {
   @override
   Future<void> loadInputData({required DataSourceType ofType}) async {
     await super.loadInputData(ofType: ofType);
+
+    root = reconstructSystem();
+    final system = System(root: root, storageSize: 70000000);
+    spaceMaker = SystemSpaceMaker(system: system, targetFreeSpace: 30000000);
   }
 
   @override
   Future<int> solve({DataSourceType forType = DataSourceType.challenge}) async {
     await loadInputData(ofType: forType);
 
-    final root = reconstructSystem();
-    final minSizeDirectories = getDirectoriesOfMinSize(
-      directory: root,
-      threshold: 100000,
-    );
-    return minSizeDirectories.fold<int>(
-        0, (sum, directory) => sum + directory.size);
+    switch (part) {
+      case 1:
+        final minSizeDirectories = SystemSpaceMaker.getDirectoriesOfMinSize(
+          directory: root,
+          threshold: 100000,
+        );
+        return minSizeDirectories.fold<int>(
+            0, (sum, directory) => sum + directory.size);
+      case 2:
+        return spaceMaker.getSortedDeletionCandidates().first.size;
+      default:
+        throw Exception('Unsupported part: $part');
+    }
   }
 }
 
@@ -96,25 +106,88 @@ class File extends SystemEntity {
   }) : _size = size;
 }
 
-mixin FileSystemAnalyzer on DailySolver<String, int> {
-  List<Directory> getDirectoriesOfMinSize({
+class System {
+  final Directory root;
+  final int storageSize;
+
+  int get used => root.size;
+  int get free => storageSize - used;
+
+  System({required this.root, required this.storageSize});
+}
+
+class SystemSpaceMaker {
+  final System system;
+  final int targetFreeSpace;
+
+  int get freeSpaceNeeded => targetFreeSpace - system.free;
+
+  SystemSpaceMaker({required this.system, required this.targetFreeSpace});
+
+  List<Directory> getSortedDeletionCandidates() {
+    final directories = getAllDirectoriesOfSizedComparedTo(
+      comparator: (directory) => directory.size >= freeSpaceNeeded,
+    );
+    directories.sort((a, b) => a.size.compareTo(b.size));
+    return directories;
+  }
+
+  List<Directory> getAllDirectoriesOfSizedComparedTo({
+    required bool Function(Directory) comparator,
+  }) =>
+      <Directory>[
+        if (comparator(system.root)) system.root,
+        ...getDirectoriesOfSizedComparedTo(
+          directory: system.root,
+          comparator: comparator,
+        ),
+      ];
+
+  static List<Directory> getDirectoriesOfSizedComparedTo({
     required Directory directory,
-    required int threshold,
+    required bool Function(Directory) comparator,
   }) {
     final directories = <Directory>[];
     for (final entity in directory.entities) {
       if (entity is Directory) {
-        if (entity.size < threshold) {
+        if (comparator(entity)) {
           directories.add(entity);
         }
-        directories.addAll(getDirectoriesOfMinSize(
+        directories.addAll(getDirectoriesOfSizedComparedTo(
           directory: entity,
-          threshold: threshold,
+          comparator: comparator,
         ));
       }
     }
     return directories;
   }
+
+  static List<Directory> getDirectoriesOfMaxSize({
+    required Directory directory,
+    required int threshold,
+  }) {
+    return getDirectoriesOfSizedComparedTo(
+      directory: directory,
+      comparator: (directory) => directory.size < threshold,
+    );
+  }
+
+  static List<Directory> getDirectoriesOfMinSize({
+    required Directory directory,
+    required int threshold,
+  }) {
+    return getDirectoriesOfSizedComparedTo(
+      directory: directory,
+      comparator: (directory) => directory.size >= threshold,
+    );
+  }
+}
+
+mixin FileSystemAnalyzer on DailySolver<String, int> {
+  late Directory root;
+  late SystemSpaceMaker spaceMaker;
+
+  int get amountOfFreeSpaceNeeded => spaceMaker.freeSpaceNeeded;
 
   Directory reconstructSystem() {
     final terminalOutput = inputData;

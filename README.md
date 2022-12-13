@@ -25,6 +25,7 @@
 
 ### --- 📆 Day 7: 💾 No Space Left On Device ---
 ⭐️ Part 1: 1084134
+⭐️ Part 2: 6183184
 
 ## 📆 Create codebase for new Advent of Code day
 ```

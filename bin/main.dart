@@ -64,5 +64,6 @@ void main(List<String> arguments) async {
     day: 7,
     name: '💾 No Space Left On Device',
     part1Response: (await DailySolver7(day: 7, part: 1).solve()),
+    part2Response: (await DailySolver7(day: 7, part: 2).solve()),
   );
 }
