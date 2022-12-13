@@ -12,20 +12,20 @@
 - ⭐️ Part 2: 2708
 
 ### --- 📆 Day 4: 🧹 Camp Cleanup ---
-⭐️ Part 1: 477
-⭐️ Part 2: 830
+- ⭐️ Part 1: 477
+- ⭐️ Part 2: 830
 
 ### --- 📆 Day 5: 📦 Supply Stacks ---
-⭐️ Part 1: SHMSDGZVC
-⭐️ Part 2: VRZGHDFBQ
+- ⭐️ Part 1: SHMSDGZVC
+- ⭐️ Part 2: VRZGHDFBQ
 
 ### --- 📆 Day 6: 📡 Tuning Trouble ---
-⭐️ Part 1: 1287
-⭐️ Part 2: 3716
+- ⭐️ Part 1: 1287
+- ⭐️ Part 2: 3716
 
 ### --- 📆 Day 7: 💾 No Space Left On Device ---
-⭐️ Part 1: 1084134
-⭐️ Part 2: 6183184
+- ⭐️ Part 1: 1084134
+- ⭐️ Part 2: 6183184
 
 ## 📆 Create codebase for new Advent of Code day
 ```
