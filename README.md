@@ -30,6 +30,9 @@
 - ⭐️ Part 1: 1084134
 - ⭐️ Part 2: 6183184
 
+### --- 📆 Day 8: 🌲 Treetop Tree House ---
+- ⭐️ Part 1: 1679
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
