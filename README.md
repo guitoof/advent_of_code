@@ -34,6 +34,9 @@
 - ⭐️ Part 1: 1679
 - ⭐️ Part 2: 536625
 
+### --- 📆 Day 9: 🪢 Rope Bridge ---
+- ⭐️ Part 1: 6026
+
 ## 📆 Create codebase for new Advent of Code day
 ```
 mason make advent_of_code_day -o ./src/challenges
