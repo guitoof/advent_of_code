@@ -1,5 +1,8 @@
 # Advent of Code
 
+<img width="707" alt="image" src="https://user-images.githubusercontent.com/4828287/207199097-f0708440-5031-46a7-a2cd-dd98a1c4eae1.png">
+
+
 ### --- 📆 Day 1: 🍫 Calorie Counting ---
 - ⭐️ Part 1: 74198
 - ⭐️ Part 2: 209914
