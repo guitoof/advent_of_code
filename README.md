@@ -36,6 +36,7 @@
 
 ### --- 📆 Day 9: 🪢 Rope Bridge ---
 - ⭐️ Part 1: 6026
+- ⭐️ Part 2: 2273
 
 ## 📆 Create codebase for new Advent of Code day
 ```

@@ -19,32 +19,32 @@ void main() {
             expectedDataMap: {
               DataSourceType.example: [
                 {
-                  'initial': Rope(head: Point(2, 1), tail: Point(1, 1)),
+                  'initial': ShortRope(head: Point(2, 1), tail: Point(1, 1)),
                   'move': {
                     'direction': Direction.right,
                   },
-                  'final': Rope(head: Point(3, 1), tail: Point(2, 1)),
+                  'final': ShortRope(head: Point(3, 1), tail: Point(2, 1)),
                 },
                 {
-                  'initial': Rope(head: Point(4, 5), tail: Point(4, 6)),
+                  'initial': ShortRope(head: Point(4, 5), tail: Point(4, 6)),
                   'move': {
                     'direction': Direction.down,
                   },
-                  'final': Rope(head: Point(4, 4), tail: Point(4, 5)),
+                  'final': ShortRope(head: Point(4, 4), tail: Point(4, 5)),
                 },
                 {
-                  'initial': Rope(head: Point(3, 1), tail: Point(2, 0)),
+                  'initial': ShortRope(head: Point(3, 1), tail: Point(2, 0)),
                   'move': {
                     'direction': Direction.up,
                   },
-                  'final': Rope(head: Point(3, 2), tail: Point(3, 1)),
+                  'final': ShortRope(head: Point(3, 2), tail: Point(3, 1)),
                 },
                 {
-                  'initial': Rope(head: Point(2, 2), tail: Point(1, 1)),
+                  'initial': ShortRope(head: Point(2, 2), tail: Point(1, 1)),
                   'move': {
                     'direction': Direction.right,
                   },
-                  'final': Rope(head: Point(3, 2), tail: Point(2, 2)),
+                  'final': ShortRope(head: Point(3, 2), tail: Point(2, 2)),
                 }
               ],
             },
@@ -53,9 +53,9 @@ void main() {
               test('should return the Tail position after 1 move to the RIGHT',
                   () async {
                 for (var data in expectedData) {
-                  final rope = data['initial'] as Rope;
+                  final rope = data['initial'] as ShortRope;
                   final move = data['move'] as Map<String, dynamic>;
-                  final finalRope = data['final'] as Rope;
+                  final finalRope = data['final'] as ShortRope;
                   rope.moveHeadByOne(
                     direction: move['direction'] as Direction,
                   );
@@ -68,18 +68,19 @@ void main() {
             },
           );
           testGroupWithExpectedDataByType(
-            'getUniqueTailVisitedPositionsCount',
+            'getUniqueTailVisitedPositionsCountForShortRope',
             expectedDataMap: {
-              DataSourceType.example: 13,
+              DataSourceType.example:
+                  88, // was 13 with the example from the 1st part
             },
             type: type,
             body: ({expectedData}) {
               test(
                   'should return number of unique positions visited by the tail',
                   () async {
-                solver9.moveRope();
-                expect(
-                    solver9.getUniqueTailVisitedPositionsCount(), expectedData);
+                solver9.moveShortRope();
+                expect(solver9.getUniqueTailVisitedPositionsCountForShortRope(),
+                    expectedData);
               });
             },
           );
@@ -90,23 +91,23 @@ void main() {
         (solver, type) {
           final solver9 = castSolverType<DailySolver9>(solver);
           testGroupWithExpectedDataByType(
-            '[someMethod2] relevant to part 2',
+            'getUniqueTailVisitedPositionsCountForLongRope',
             expectedDataMap: {
-              DataSourceType.example: 'Expected Data for Example',
-              // Challenge case will be skipped
-              // if [DataSourceType.challenge] is missing (null)
+              DataSourceType.example: 36,
             },
             type: type,
             body: ({expectedData}) {
-              test('test some behavior of [someMethod2]', () async {
-                expect(solver9, isA<DailySolver9>());
-                // Use [expectedData] to test the behavior of [someMethod]
-                // expect(solver9.someMethod2(), expectedData);
+              test(
+                  'should return the number of uniquely visited positions for the tail of a long rope',
+                  () async {
+                solver9.moveLongRope();
+                expect(solver9.getUniqueTailVisitedPositionsCountForLongRope(),
+                    expectedData);
               });
             },
           );
         },
-        skipTypes: [DataSourceType.challenge, DataSourceType.example],
+        skipTypes: [DataSourceType.challenge],
       ),
     },
   );

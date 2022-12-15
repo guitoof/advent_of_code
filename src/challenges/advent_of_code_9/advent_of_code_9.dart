@@ -12,7 +12,6 @@ class DailySolver9 extends DailySolver<Command, int> with RopeDriver {
   Command lineParser(String line) {
     // Here was the problem: line.split('') instead of line.split(' ')
     final commandData = line.split(' ');
-    print(commandData);
     return Command(
       direction: Direction.fromStringCode(commandData.first),
       distance: int.parse(commandData.last),
@@ -31,8 +30,11 @@ class DailySolver9 extends DailySolver<Command, int> with RopeDriver {
 
     switch (part) {
       case 1:
-        moveRope();
-        return getUniqueTailVisitedPositionsCount();
+        moveShortRope();
+        return getUniqueTailVisitedPositionsCountForShortRope();
+      case 2:
+        moveLongRope();
+        return getUniqueTailVisitedPositionsCountForLongRope();
       default:
         throw ArgumentError('Unsupported part: $part');
     }
@@ -74,12 +76,73 @@ class Command {
 }
 
 // ignore: must_be_immutable
-class Rope extends Equatable {
+class LongRope extends Equatable {
+  List<ShortRope> nodes = <ShortRope>[];
+
+  ShortRope get headRope => nodes.first;
+  set headRope(ShortRope newHeadRope) {
+    nodes.first = newHeadRope;
+  }
+
+  ShortRope get tailRope => nodes.last;
+  set tailRope(ShortRope newTailRope) {
+    nodes.last = newTailRope;
+  }
+
+  Point get head => headRope.head;
+  set head(Point newHead) {
+    headRope.head = newHead;
+  }
+
+  Point get tail => tailRope.tail;
+  set tail(Point newTail) {
+    headRope.head = newTail;
+  }
+
+  LongRope.fromPoints(List<Point> points) {
+    for (var i = 0; i < points.length - 1; i++) {
+      nodes.add(ShortRope(head: points[i], tail: points[i + 1]));
+    }
+  }
+
+  void propagateToNodes() {
+    for (var i = 1; i < nodes.length; i++) {
+      nodes[i].head = nodes[i - 1].tail;
+      nodes[i].catchupTail();
+    }
+  }
+
+  void moveHeadByOne({required Direction direction}) {
+    headRope.moveHeadByOne(direction: direction);
+    propagateToNodes();
+  }
+
+  int get countTailVisitedPositions => tailRope.countTailVisitedPositions;
+
+  @override
+  List<Object?> get props => [nodes];
+
+  @override
+  String toString() => '''
+${[
+        for (var row = -50; row <= 50; row++)
+          [
+            for (var col = -50; col <= 50; col++)
+              tailRope.tailVisitedPositions.contains(Point(col, row))
+                  ? '#'
+                  : '.'
+          ].join('')
+      ].join('\n')}
+    ''';
+}
+
+// ignore: must_be_immutable
+class ShortRope extends Equatable {
   Point head = Point(0, 0);
   Point tail = Point(0, 0);
   late List<Point> tailVisitedPositions = [];
 
-  Rope({required this.head, required this.tail}) {
+  ShortRope({required this.head, required this.tail}) {
     tailVisitedPositions.add(tail);
   }
 
@@ -136,6 +199,14 @@ class Rope extends Equatable {
       tail = Point(tail.x - 1, tail.y + 1);
     } else if (head - tail == Point(-2, -1) || head - tail == Point(-1, -2)) {
       tail = Point(tail.x - 1, tail.y - 1);
+    } else if (head - tail == Point(2, 2)) {
+      tail = Point(tail.x + 1, tail.y + 1);
+    } else if (head - tail == Point(-2, -2)) {
+      tail = Point(tail.x - 1, tail.y - 1);
+    } else if (head - tail == Point(2, -2)) {
+      tail = Point(tail.x + 1, tail.y - 1);
+    } else if (head - tail == Point(-2, 2)) {
+      tail = Point(tail.x - 1, tail.y + 1);
     } else {
       throw Exception('Tail is too far away from head: T: $tail, H: $head');
     }
@@ -155,9 +226,13 @@ class Rope extends Equatable {
 
 mixin RopeDriver {
   late List<Command> commands;
-  final rope = Rope(head: Point(0, 0), tail: Point(0, 0));
+  final rope = ShortRope(head: Point(0, 0), tail: Point(0, 0));
+  final longRope = LongRope.fromPoints(List.generate(
+    10,
+    ((_) => Point(0, 0)),
+  ));
 
-  void moveRope() {
+  void moveShortRope() {
     for (var command in commands) {
       for (var i = 0; i < command.distance; i++) {
         rope.moveHeadByOne(direction: command.direction);
@@ -165,7 +240,19 @@ mixin RopeDriver {
     }
   }
 
-  getUniqueTailVisitedPositionsCount() {
+  void moveLongRope() {
+    for (var command in commands) {
+      for (var i = 0; i < command.distance; i++) {
+        longRope.moveHeadByOne(direction: command.direction);
+      }
+    }
+  }
+
+  getUniqueTailVisitedPositionsCountForShortRope() {
     return rope.countTailVisitedPositions;
+  }
+
+  getUniqueTailVisitedPositionsCountForLongRope() {
+    return longRope.countTailVisitedPositions;
   }
 }

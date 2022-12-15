@@ -78,5 +78,6 @@ void main(List<String> arguments) async {
     day: 9,
     name: '🪢 Rope Bridge',
     part1Response: (await DailySolver9(day: 9, part: 1).solve()),
+    part2Response: (await DailySolver9(day: 9, part: 2).solve()),
   );
 }
